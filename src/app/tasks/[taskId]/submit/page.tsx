@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
+import { compressFile, CompressionResult } from '../../../../utils/fileCompression';
 
 interface Task {
   id: string;
@@ -20,6 +21,9 @@ export default function SubmitTaskPage() {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [compressedFile, setCompressedFile] = useState<File | null>(null);
+  const [compressionInfo, setCompressionInfo] = useState<CompressionResult | null>(null);
+  const [compressing, setCompressing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
 
@@ -46,16 +50,39 @@ export default function SubmitTaskPage() {
     fetchTask();
   }, [fetchTask]);
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
+      setSelectedFile(file);
+      setCompressedFile(null);
+      setCompressionInfo(null);
+      setError(null);
+      
       // Verifica il tipo di file
-      if (file.type.startsWith('image/') || file.type.startsWith('video/')) {
-        setSelectedFile(file);
-        setError(null);
-      } else {
-        setError('Seleziona un file immagine o video valido');
+      if (!file.type.startsWith('image/') && !file.type.startsWith('video/')) {
+        setError('Seleziona un\'immagine o un video');
         setSelectedFile(null);
+        return;
+      }
+
+      // Comprimi automaticamente il file
+      setCompressing(true);
+      try {
+        const result = await compressFile(file);
+        
+        if (result.success && result.file) {
+          setCompressedFile(result.file);
+          setCompressionInfo(result);
+        } else {
+          setError(result.error || 'Errore durante la compressione');
+          setSelectedFile(null);
+        }
+      } catch (error) {
+        console.error('Compression error:', error);
+        setError('Errore durante la compressione del file');
+        setSelectedFile(null);
+      } finally {
+        setCompressing(false);
       }
     }
   };
@@ -68,6 +95,11 @@ export default function SubmitTaskPage() {
       return;
     }
 
+    if (!compressedFile) {
+      setError('File in compressione, attendi...');
+      return;
+    }
+
     setSubmitting(true);
     setError(null);
 
@@ -75,7 +107,7 @@ export default function SubmitTaskPage() {
       const formData = new FormData();
       formData.append('taskId', taskId);
       formData.append('userId', session!.user.id);
-      formData.append('file', selectedFile);
+      formData.append('file', compressedFile); // Usa il file compresso
 
       const response = await fetch('/api/submit', {
         method: 'POST',
@@ -226,10 +258,54 @@ export default function SubmitTaskPage() {
                   required
                 />
                 <p className="help-text">
-                  Accettiamo file immagine (JPG, PNG, GIF) e video (MP4, MOV, AVI)
+                  Accettiamo file immagine (JPG, PNG, GIF) e video (MP4, MOV, AVI). 
+                  I file vengono automaticamente compressi per ottimizzare lo storage.
                 </p>
               </div>
             </div>
+
+            {/* Stato compressione */}
+            {compressing && (
+              <div className="row">
+                <div className="twelve columns">
+                  <div style={{ 
+                    padding: '1rem', 
+                    backgroundColor: '#f0f8ff', 
+                    border: '1px solid #b3d9ff', 
+                    borderRadius: '4px',
+                    textAlign: 'center'
+                  }}>
+                    <p>🔄 Comprimendo file...</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Informazioni compressione */}
+            {compressionInfo && selectedFile && (
+              <div className="row">
+                <div className="twelve columns">
+                  <div style={{ 
+                    padding: '1rem', 
+                    backgroundColor: '#f0fff0', 
+                    border: '1px solid #90ee90', 
+                    borderRadius: '4px'
+                  }}>
+                    <h6>✅ File Ottimizzato per Storage</h6>
+                    <div style={{ fontSize: '0.9em', color: '#666' }}>
+                      <p><strong>File originale:</strong> {selectedFile.name} ({(compressionInfo.originalSize / 1024 / 1024).toFixed(2)} MB)</p>
+                      <p><strong>File ottimizzato:</strong> {(compressionInfo.compressedSize / 1024).toFixed(0)} KB</p>
+                      {compressionInfo.compressionRatio > 0 && (
+                        <p><strong>Spazio risparmiato:</strong> {compressionInfo.compressionRatio.toFixed(1)}%</p>
+                      )}
+                      <p style={{ color: '#28a745', fontWeight: 'bold' }}>
+                        💾 Ottimizzato per il nostro storage limitato!
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {error && (
               <div className="row">
@@ -246,9 +322,9 @@ export default function SubmitTaskPage() {
                 <button
                   type="submit"
                   className="button button-primary u-full-width"
-                  disabled={!selectedFile || submitting}
+                  disabled={!selectedFile || !compressedFile || submitting || compressing}
                 >
-                  {submitting ? 'Invio in corso...' : 'Completa Task'}
+                  {compressing ? 'Comprimendo...' : submitting ? 'Invio in corso...' : 'Completa Task'}
                 </button>
               </div>
             </div>
