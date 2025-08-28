@@ -6,6 +6,7 @@ declare module 'next-auth' {
     username: string;
     tableId: string;
     tableName: string;
+    isAdmin: boolean;
   }
 
   interface Session {
@@ -14,6 +15,7 @@ declare module 'next-auth' {
       username: string;
       tableId: string;
       tableName: string;
+      isAdmin: boolean;
     } & DefaultSession['user'];
   }
 }
@@ -23,5 +25,6 @@ declare module 'next-auth/jwt' {
     username?: string;
     tableId?: string;
     tableName?: string;
+    isAdmin?: boolean;
   }
 }

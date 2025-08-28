@@ -46,6 +46,7 @@ const handler = NextAuth({
             username: user.username,
             tableId: user.tableId,
             tableName: user.table.name,
+            isAdmin: user.isAdmin,
           };
         } catch (error) {
           console.error('Auth error:', error);
@@ -63,6 +64,7 @@ const handler = NextAuth({
         token.username = user.username;
         token.tableId = user.tableId;
         token.tableName = user.tableName;
+        token.isAdmin = user.isAdmin;
       }
       return token;
     },
@@ -74,6 +76,7 @@ const handler = NextAuth({
           username: token.username as string,
           tableId: token.tableId as string,
           tableName: token.tableName as string,
+          isAdmin: token.isAdmin as boolean,
         };
       }
       return session;

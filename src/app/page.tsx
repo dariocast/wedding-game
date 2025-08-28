@@ -101,11 +101,13 @@ export default function Home() {
                 </a>
               </div>
 
-              <div style={{ marginBottom: '1rem' }}>
-                <Link href="/admin" className="button u-full-width">
-                  ⚙️ Pannello Admin
-                </Link>
-              </div>
+              {session.user.isAdmin && (
+                <div style={{ marginBottom: '1rem' }}>
+                  <Link href="/admin" className="button u-full-width">
+                    ⚙️ Pannello Admin
+                  </Link>
+                </div>
+              )}
 
               <div>
                 <button 
