@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 
 interface Task {
@@ -11,28 +12,40 @@ interface Task {
 }
 
 export default function TasksPage() {
+  const { data: session } = useSession();
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchTasks();
-  }, []);
+  }, [fetchTasks]);
 
-  const fetchTasks = async () => {
+  const fetchTasks = useCallback(async () => {
     try {
-      const response = await fetch('/api/tasks');
-      if (!response.ok) {
-        throw new Error('Failed to fetch tasks');
+      if (!session?.user?.id) {
+        // Se non c'è sessione, mostra tutti i task
+        const response = await fetch('/api/tasks');
+        if (!response.ok) {
+          throw new Error('Failed to fetch tasks');
+        }
+        const data = await response.json();
+        setTasks(data);
+      } else {
+        // Se c'è sessione, mostra solo i task disponibili (non completati)
+        const response = await fetch(`/api/tasks/available?userId=${session.user.id}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch available tasks');
+        }
+        const data = await response.json();
+        setTasks(data.availableTasks);
       }
-      const data = await response.json();
-      setTasks(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setLoading(false);
     }
-  };
+  }, [session]);
 
   if (loading) {
     return (

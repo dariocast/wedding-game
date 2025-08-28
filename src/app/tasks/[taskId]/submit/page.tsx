@@ -86,6 +86,11 @@ export default function SubmitTaskPage() {
         const result = await response.json();
         setSuccess(true);
         console.log('Submission successful:', result);
+        
+        // Reindirizza alla lista task dopo 2 secondi
+        setTimeout(() => {
+          window.location.href = '/tasks';
+        }, 2000);
       } else {
         const errorData = await response.json();
         setError(errorData.error || 'Errore durante l\'invio');

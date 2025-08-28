@@ -114,7 +114,28 @@ export default function GalleryPage() {
               {submissions.map((submission) => (
                 <div key={submission.id} className="four columns" style={{ marginBottom: '2rem' }}>
                   <div style={{ border: '1px solid #e1e1e1', borderRadius: '4px', padding: '1rem' }}>
-                    {submission.fileType === 'image' ? (
+                    {submission.fileUrl.includes('placeholder') || submission.fileUrl.includes('via.placeholder.com') ? (
+                      // Mostra placeholder personalizzato per file mock
+                      <div style={{ 
+                        width: '100%', 
+                        height: '200px', 
+                        backgroundColor: '#f8f9fa', 
+                        borderRadius: '4px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexDirection: 'column',
+                        border: '2px dashed #dee2e6'
+                      }}>
+                        <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>
+                          {submission.fileType === 'image' ? '📷' : '🎥'}
+                        </div>
+                        <div style={{ color: '#6c757d', fontSize: '0.9rem', textAlign: 'center' }}>
+                          Task Completato!<br />
+                          <small>File caricato con successo</small>
+                        </div>
+                      </div>
+                    ) : submission.fileType === 'image' ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img
                         src={submission.fileUrl}
@@ -142,7 +163,7 @@ export default function GalleryPage() {
                     )}
                     
                     {/* Fallback per file non caricabili */}
-                    <div style={{ display: 'none', width: '100%', height: '200px', backgroundColor: '#f5f5f5', alignItems: 'center', justifyContent: 'center', borderRadius: '4px' }}>
+                    <div style={{ display: 'none', width: '100%', height: '200px', backgroundColor: '#f5f5f5', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '4px' }}>
                       <span style={{ color: '#666' }}>
                         {submission.fileType === 'image' ? '🖼️' : '🎥'} File non disponibile
                       </span>
