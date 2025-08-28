@@ -22,7 +22,41 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Trova e aggiorna l'utente
+    // Prima verifica se l'utente esiste
+    const existingUser = await prisma.user.findUnique({
+      where: { username },
+      include: {
+        table: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
+
+    if (!existingUser) {
+      return NextResponse.json(
+        { error: `Utente '${username}' non trovato. Assicurati che l'utente sia registrato prima.` },
+        { status: 404 }
+      );
+    }
+
+    if (existingUser.isAdmin) {
+      return NextResponse.json(
+        { 
+          success: true,
+          message: `Utente ${username} è già amministratore`,
+          user: {
+            id: existingUser.id,
+            username: existingUser.username,
+            isAdmin: existingUser.isAdmin,
+            tableName: existingUser.table.name,
+          },
+        }
+      );
+    }
+
+    // Aggiorna l'utente per renderlo admin
     const user = await prisma.user.update({
       where: { username },
       data: { isAdmin: true },
@@ -49,7 +83,10 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Error making user admin:', error);
     return NextResponse.json(
-      { error: 'Errore durante l\'aggiornamento dell\'utente' },
+      { 
+        error: 'Errore durante l\'aggiornamento dell\'utente',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      },
       { status: 500 }
     );
   }
