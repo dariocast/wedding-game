@@ -20,12 +20,39 @@ interface Submission {
   };
 }
 
+interface FilterOptions {
+  table: string;
+  fileType: string;
+  task: string;
+  dateRange: string;
+  scoreRange: string;
+  sortBy: string;
+  sortOrder: 'asc' | 'desc';
+}
+
 export default function GalleryPage() {
   const [submissions, setSubmissions] = useState<Submission[]>([]);
+  const [filteredSubmissions, setFilteredSubmissions] = useState<Submission[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedSubmission, setSelectedSubmission] = useState<Submission | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [showFilters, setShowFilters] = useState(false);
+  
+  // Filter states
+  const [filters, setFilters] = useState<FilterOptions>({
+    table: '',
+    fileType: '',
+    task: '',
+    dateRange: '',
+    scoreRange: '',
+    sortBy: 'date',
+    sortOrder: 'desc'
+  });
+
+  // Derived data for filter options
+  const [availableTables, setAvailableTables] = useState<string[]>([]);
+  const [availableTasks, setAvailableTasks] = useState<string[]>([]);
 
   useEffect(() => {
     fetchSubmissions();
@@ -48,17 +75,17 @@ export default function GalleryPage() {
   const navigateModal = useCallback((direction: 'prev' | 'next') => {
     if (!selectedSubmission) return;
     
-    const currentIndex = submissions.findIndex(s => s.id === selectedSubmission.id);
+    const currentIndex = filteredSubmissions.findIndex(s => s.id === selectedSubmission.id);
     let newIndex;
     
     if (direction === 'prev') {
-      newIndex = currentIndex > 0 ? currentIndex - 1 : submissions.length - 1;
+      newIndex = currentIndex > 0 ? currentIndex - 1 : filteredSubmissions.length - 1;
     } else {
-      newIndex = currentIndex < submissions.length - 1 ? currentIndex + 1 : 0;
+      newIndex = currentIndex < filteredSubmissions.length - 1 ? currentIndex + 1 : 0;
     }
     
-    setSelectedSubmission(submissions[newIndex]);
-  }, [selectedSubmission, submissions]);
+    setSelectedSubmission(filteredSubmissions[newIndex]);
+  }, [selectedSubmission, filteredSubmissions]);
 
   // Gestione tasti keyboard
   useEffect(() => {
@@ -80,7 +107,7 @@ export default function GalleryPage() {
 
     document.addEventListener('keydown', handleKeyPress);
     return () => document.removeEventListener('keydown', handleKeyPress);
-  }, [modalOpen, selectedSubmission, submissions]);
+  }, [modalOpen, navigateModal]);
 
   const fetchSubmissions = async () => {
     try {
@@ -90,11 +117,138 @@ export default function GalleryPage() {
       }
       const data = await response.json();
       setSubmissions(data);
+      
+      // Extract unique values for filter options
+      const tables = [...new Set(data.map((s: Submission) => s.user.table.name))] as string[];
+      const tasks = [...new Set(data.map((s: Submission) => s.task.description))] as string[];
+      setAvailableTables(tables);
+      setAvailableTasks(tasks);
+      
+      // Initialize filtered submissions
+      setFilteredSubmissions(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setLoading(false);
     }
+  };
+
+  // Filter and sort submissions
+  const applyFilters = useCallback(() => {
+    let filtered = [...submissions];
+
+    // Filter by table
+    if (filters.table) {
+      filtered = filtered.filter(s => s.user.table.name === filters.table);
+    }
+
+    // Filter by file type
+    if (filters.fileType) {
+      filtered = filtered.filter(s => s.fileType === filters.fileType);
+    }
+
+    // Filter by task
+    if (filters.task) {
+      filtered = filtered.filter(s => s.task.description === filters.task);
+    }
+
+    // Filter by date range
+    if (filters.dateRange) {
+      const now = new Date();
+      const filterDate = new Date();
+      
+      switch (filters.dateRange) {
+        case 'today':
+          filterDate.setHours(0, 0, 0, 0);
+          filtered = filtered.filter(s => new Date(s.createdAt) >= filterDate);
+          break;
+        case 'week':
+          filterDate.setDate(now.getDate() - 7);
+          filtered = filtered.filter(s => new Date(s.createdAt) >= filterDate);
+          break;
+        case 'month':
+          filterDate.setMonth(now.getMonth() - 1);
+          filtered = filtered.filter(s => new Date(s.createdAt) >= filterDate);
+          break;
+      }
+    }
+
+    // Filter by score range
+    if (filters.scoreRange) {
+      switch (filters.scoreRange) {
+        case 'positive':
+          filtered = filtered.filter(s => s.task.score > 0);
+          break;
+        case 'negative':
+          filtered = filtered.filter(s => s.task.score < 0);
+          break;
+        case 'high':
+          filtered = filtered.filter(s => s.task.score >= 20);
+          break;
+        case 'medium':
+          filtered = filtered.filter(s => s.task.score >= 10 && s.task.score < 20);
+          break;
+        case 'low':
+          filtered = filtered.filter(s => s.task.score > 0 && s.task.score < 10);
+          break;
+      }
+    }
+
+    // Sort submissions
+    filtered.sort((a, b) => {
+      let aValue: string | number | Date, bValue: string | number | Date;
+      
+      switch (filters.sortBy) {
+        case 'date':
+          aValue = new Date(a.createdAt);
+          bValue = new Date(b.createdAt);
+          break;
+        case 'score':
+          aValue = a.task.score;
+          bValue = b.task.score;
+          break;
+        case 'table':
+          aValue = a.user.table.name;
+          bValue = b.user.table.name;
+          break;
+        case 'user':
+          aValue = a.user.username;
+          bValue = b.user.username;
+          break;
+        default:
+          aValue = new Date(a.createdAt);
+          bValue = new Date(b.createdAt);
+      }
+
+      if (aValue < bValue) return filters.sortOrder === 'asc' ? -1 : 1;
+      if (aValue > bValue) return filters.sortOrder === 'asc' ? 1 : -1;
+      return 0;
+    });
+
+    setFilteredSubmissions(filtered);
+  }, [submissions, filters]);
+
+  // Apply filters when submissions or filters change
+  useEffect(() => {
+    applyFilters();
+  }, [applyFilters]);
+
+  // Reset filters
+  const resetFilters = () => {
+    setFilters({
+      table: '',
+      fileType: '',
+      task: '',
+      dateRange: '',
+      scoreRange: '',
+      sortBy: 'date',
+      sortOrder: 'desc'
+    });
+  };
+
+  // Update filter
+  const updateFilter = (key: keyof FilterOptions, value: string | 'asc' | 'desc') => {
+    setFilters(prev => ({ ...prev, [key]: value }));
   };
 
   const formatDate = (dateString: string) => {
@@ -194,8 +348,247 @@ export default function GalleryPage() {
         <div className="wedding-divider"></div>
       </section>
 
+      {/* Filter Controls */}
+      {submissions.length > 0 && (
+        <div className="card-wedding mb-4">
+          <div className="flex justify-between items-center mb-3">
+            <h3 style={{ 
+              color: 'var(--wedding-prussian)', 
+              fontSize: '1.5rem', 
+              margin: 0,
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem'
+            }}>
+              🔍 Filtri & Ordinamento
+            </h3>
+            <button
+              onClick={() => setShowFilters(!showFilters)}
+              className="btn-wedding-outline"
+              style={{ fontSize: '0.9rem', padding: '8px 16px' }}
+            >
+              {showFilters ? '🔼 Nascondi' : '🔽 Mostra'} Filtri
+            </button>
+          </div>
+
+          {showFilters && (
+            <div style={{
+              background: 'linear-gradient(135deg, rgba(0, 167, 225, 0.05), rgba(0, 126, 167, 0.02))',
+              border: '1px solid rgba(0, 167, 225, 0.1)',
+              borderRadius: '12px',
+              padding: '1.5rem'
+            }}>
+              {/* Filter Grid */}
+              <div className="grid-wedding-3 mb-3">
+                {/* Table Filter */}
+                <div>
+                  <label style={{ 
+                    display: 'block', 
+                    marginBottom: '0.5rem', 
+                    color: 'var(--wedding-prussian)', 
+                    fontWeight: '600',
+                    fontSize: '0.9rem'
+                  }}>
+                    🏆 Tavolo
+                  </label>
+                  <select
+                    value={filters.table}
+                    onChange={(e) => updateFilter('table', e.target.value)}
+                    className="input-wedding"
+                    style={{ fontSize: '0.9rem' }}
+                  >
+                    <option value="">Tutti i tavoli</option>
+                    {availableTables.map(table => (
+                      <option key={table} value={table}>{table}</option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* File Type Filter */}
+                <div>
+                  <label style={{ 
+                    display: 'block', 
+                    marginBottom: '0.5rem', 
+                    color: 'var(--wedding-prussian)', 
+                    fontWeight: '600',
+                    fontSize: '0.9rem'
+                  }}>
+                    📁 Tipo Media
+                  </label>
+                  <select
+                    value={filters.fileType}
+                    onChange={(e) => updateFilter('fileType', e.target.value)}
+                    className="input-wedding"
+                    style={{ fontSize: '0.9rem' }}
+                  >
+                    <option value="">Tutti i tipi</option>
+                    <option value="image">📷 Solo Foto</option>
+                    <option value="video">🎥 Solo Video</option>
+                  </select>
+                </div>
+
+                {/* Task Filter */}
+                <div>
+                  <label style={{ 
+                    display: 'block', 
+                    marginBottom: '0.5rem', 
+                    color: 'var(--wedding-prussian)', 
+                    fontWeight: '600',
+                    fontSize: '0.9rem'
+                  }}>
+                    📋 Task
+                  </label>
+                  <select
+                    value={filters.task}
+                    onChange={(e) => updateFilter('task', e.target.value)}
+                    className="input-wedding"
+                    style={{ fontSize: '0.9rem' }}
+                  >
+                    <option value="">Tutti i task</option>
+                    {availableTasks.map(task => (
+                      <option key={task} value={task}>
+                        {task.length > 30 ? `${task.substring(0, 30)}...` : task}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              {/* Second Row of Filters */}
+              <div className="grid-wedding-4 mb-3">
+                {/* Date Range Filter */}
+                <div>
+                  <label style={{ 
+                    display: 'block', 
+                    marginBottom: '0.5rem', 
+                    color: 'var(--wedding-prussian)', 
+                    fontWeight: '600',
+                    fontSize: '0.9rem'
+                  }}>
+                    📅 Periodo
+                  </label>
+                  <select
+                    value={filters.dateRange}
+                    onChange={(e) => updateFilter('dateRange', e.target.value)}
+                    className="input-wedding"
+                    style={{ fontSize: '0.9rem' }}
+                  >
+                    <option value="">Tutte le date</option>
+                    <option value="today">Oggi</option>
+                    <option value="week">Ultima settimana</option>
+                    <option value="month">Ultimo mese</option>
+                  </select>
+                </div>
+
+                {/* Score Range Filter */}
+                <div>
+                  <label style={{ 
+                    display: 'block', 
+                    marginBottom: '0.5rem', 
+                    color: 'var(--wedding-prussian)', 
+                    fontWeight: '600',
+                    fontSize: '0.9rem'
+                  }}>
+                    🎯 Punteggio
+                  </label>
+                  <select
+                    value={filters.scoreRange}
+                    onChange={(e) => updateFilter('scoreRange', e.target.value)}
+                    className="input-wedding"
+                    style={{ fontSize: '0.9rem' }}
+                  >
+                    <option value="">Tutti i punteggi</option>
+                    <option value="positive">✅ Positivi</option>
+                    <option value="negative">❌ Negativi</option>
+                    <option value="high">🏆 Alti (≥20)</option>
+                    <option value="medium">🥈 Medi (10-19)</option>
+                    <option value="low">🥉 Bassi (1-9)</option>
+                  </select>
+                </div>
+
+                {/* Sort By */}
+                <div>
+                  <label style={{ 
+                    display: 'block', 
+                    marginBottom: '0.5rem', 
+                    color: 'var(--wedding-prussian)', 
+                    fontWeight: '600',
+                    fontSize: '0.9rem'
+                  }}>
+                    📊 Ordina per
+                  </label>
+                  <select
+                    value={filters.sortBy}
+                    onChange={(e) => updateFilter('sortBy', e.target.value)}
+                    className="input-wedding"
+                    style={{ fontSize: '0.9rem' }}
+                  >
+                    <option value="date">📅 Data</option>
+                    <option value="score">🎯 Punteggio</option>
+                    <option value="table">🏆 Tavolo</option>
+                    <option value="user">👤 Utente</option>
+                  </select>
+                </div>
+
+                {/* Sort Order */}
+                <div>
+                  <label style={{ 
+                    display: 'block', 
+                    marginBottom: '0.5rem', 
+                    color: 'var(--wedding-prussian)', 
+                    fontWeight: '600',
+                    fontSize: '0.9rem'
+                  }}>
+                    🔄 Direzione
+                  </label>
+                  <select
+                    value={filters.sortOrder}
+                    onChange={(e) => updateFilter('sortOrder', e.target.value as 'asc' | 'desc')}
+                    className="input-wedding"
+                    style={{ fontSize: '0.9rem' }}
+                  >
+                    <option value="desc">⬇️ Decrescente</option>
+                    <option value="asc">⬆️ Crescente</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Filter Actions */}
+              <div className="flex justify-between items-center" style={{ marginTop: '1rem' }}>
+                <div style={{ fontSize: '0.9rem', color: 'var(--wedding-cerulean)' }}>
+                  📊 Mostrando <strong>{filteredSubmissions.length}</strong> di <strong>{submissions.length}</strong> submission
+                </div>
+                <button
+                  onClick={resetFilters}
+                  className="btn-wedding-secondary"
+                  style={{ fontSize: '0.9rem', padding: '8px 16px' }}
+                >
+                  🔄 Reset Filtri
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
       {/* Gallery Content */}
-      {submissions.length === 0 ? (
+      {filteredSubmissions.length === 0 && submissions.length > 0 ? (
+        <div className="card-wedding text-center">
+          <div className="animate-float" style={{ marginBottom: '2rem' }}>
+            <span style={{ fontSize: '4rem', display: 'block' }}>🔍</span>
+          </div>
+          <h3 style={{ color: 'var(--wedding-prussian)', marginBottom: '1rem' }}>
+            Nessun Risultato
+          </h3>
+          <p style={{ color: 'var(--wedding-cerulean)', marginBottom: '2rem', fontSize: '1.1rem' }}>
+            Non ci sono submission che corrispondono ai filtri selezionati.<br />
+            Prova a modificare i criteri di ricerca.
+          </p>
+          <button onClick={resetFilters} className="btn-wedding-primary">
+            🔄 Reset Filtri
+          </button>
+        </div>
+      ) : submissions.length === 0 ? (
         <div className="card-wedding text-center">
           <div className="animate-float" style={{ marginBottom: '2rem' }}>
             <span style={{ fontSize: '4rem', display: 'block' }}>📷</span>
@@ -223,16 +616,19 @@ export default function GalleryPage() {
             fontSize: '1rem'
           }}>
             <div className="text-center">
-              <strong>📊 {submissions.length} Submission</strong><br />
+              <strong>📊 {filteredSubmissions.length} Submission</strong><br />
               <span style={{ color: 'var(--wedding-cerulean)' }}>
-                Momenti condivisi nel Wedding Game
+                {filteredSubmissions.length !== submissions.length 
+                  ? `Filtrate da ${submissions.length} totali`
+                  : 'Momenti condivisi nel Wedding Game'
+                }
               </span>
             </div>
           </div>
 
           {/* Gallery Grid */}
           <div className="grid-wedding grid-wedding-3">
-            {submissions.map((submission, index) => (
+            {filteredSubmissions.map((submission, index) => (
               <div key={submission.id} className="card-wedding" style={{ 
                 animationDelay: `${index * 0.1}s`,
                 cursor: 'pointer',
@@ -495,7 +891,7 @@ export default function GalleryPage() {
             </button>
 
             {/* Navigation Buttons */}
-            {submissions.length > 1 && (
+            {filteredSubmissions.length > 1 && (
               <>
                 <button
                   onClick={() => navigateModal('prev')}
@@ -654,7 +1050,7 @@ export default function GalleryPage() {
             </div>
 
             {/* Position Indicator */}
-            {submissions.length > 1 && (
+            {filteredSubmissions.length > 1 && (
               <div
                 style={{
                   position: 'absolute',
@@ -670,7 +1066,7 @@ export default function GalleryPage() {
                   boxShadow: '0 4px 15px rgba(0, 167, 225, 0.3)'
                 }}
               >
-                {submissions.findIndex(s => s.id === selectedSubmission.id) + 1} / {submissions.length}
+                {filteredSubmissions.findIndex(s => s.id === selectedSubmission.id) + 1} / {filteredSubmissions.length}
               </div>
             )}
           </div>
