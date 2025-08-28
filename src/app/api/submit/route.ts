@@ -52,7 +52,12 @@ export async function POST(request: NextRequest) {
 
     if (!isSupabaseConfigured || !supabase) {
       // Supabase non configurato - usa un placeholder più descrittivo
-      console.log('Supabase Storage not configured, using placeholder');
+      console.log('🔧 Supabase Storage not configured, using placeholder');
+      console.log('📋 Environment check:', {
+        hasUrl: !!supabaseUrl,
+        hasKey: !!supabaseKey,
+        urlPreview: supabaseUrl ? `${supabaseUrl.substring(0, 30)}...` : 'MISSING',
+      });
       fileUrl = `data:image/svg+xml;base64,${Buffer.from(`
         <svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
           <rect width="400" height="300" fill="#f8f9fa" stroke="#dee2e6" stroke-width="2" stroke-dasharray="10,5"/>
@@ -70,13 +75,25 @@ export async function POST(request: NextRequest) {
       uploadMessage = 'Task completato! (Storage non configurato)';
     } else {
       try {
+        console.log('🚀 Attempting Supabase upload:', {
+          fileName,
+          filePath,
+          fileSize: `${(file.size / 1024).toFixed(1)}KB`,
+          fileType,
+        });
+
         // Upload del file su Supabase Storage
         const { error: uploadError } = await supabase.storage
           .from('submissions')
           .upload(filePath, file);
 
         if (uploadError) {
-          console.error('Upload error:', uploadError);
+          console.error('❌ Supabase upload error:', uploadError);
+          console.error('📋 Upload details:', {
+            bucket: 'submissions',
+            path: filePath,
+            errorCode: uploadError.message,
+          });
           // Se l'upload fallisce, usa un placeholder informativo
           fileUrl = `data:image/svg+xml;base64,${Buffer.from(`
             <svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
@@ -94,10 +111,14 @@ export async function POST(request: NextRequest) {
           `).toString('base64')}`;
           uploadMessage = 'Task completato! (Upload fallito ma punti assegnati)';
         } else {
+          console.log('✅ Supabase upload successful!');
+          
           // Ottieni l'URL pubblico del file
           const { data: urlData } = supabase.storage
             .from('submissions')
             .getPublicUrl(filePath);
+          
+          console.log('🔗 Generated public URL:', urlData.publicUrl);
           
           fileUrl = urlData.publicUrl;
           uploadMessage = 'Task completato con successo!';
