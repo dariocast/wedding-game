@@ -41,8 +41,18 @@ export default function AdminLeaderboardPage() {
   const [newTableName, setNewTableName] = useState('');
   const [newTaskDescription, setNewTaskDescription] = useState('');
   const [newTaskScore, setNewTaskScore] = useState('');
-  // const [editingTable, setEditingTable] = useState<Table | null>(null);
-  // const [editingTask, setEditingTask] = useState<Task | null>(null);
+  
+  // Edit dialog states
+  const [editingTable, setEditingTable] = useState<Table | null>(null);
+  const [editingTask, setEditingTask] = useState<Task | null>(null);
+  const [showEditTableDialog, setShowEditTableDialog] = useState(false);
+  const [showEditTaskDialog, setShowEditTaskDialog] = useState(false);
+  
+  // Edit form states
+  const [editTableName, setEditTableName] = useState('');
+  const [editTaskDescription, setEditTaskDescription] = useState('');
+  const [editTaskScore, setEditTaskScore] = useState('');
+  const [editTaskActive, setEditTaskActive] = useState(true);
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -126,7 +136,7 @@ export default function AdminLeaderboardPage() {
     }
   };
 
-  const handleUpdateTable = async (table: Table, newScore: number) => {
+  const handleUpdateTableScore = async (table: Table, newScore: number) => {
     try {
       const response = await fetch('/api/admin/tables', {
         method: 'PUT',
@@ -161,6 +171,144 @@ export default function AdminLeaderboardPage() {
       }
     } catch (error) {
       console.error('Error toggling task:', error);
+    }
+  };
+
+  // Edit Table Functions
+  const openEditTableDialog = (table: Table) => {
+    setEditingTable(table);
+    setEditTableName(table.name);
+    setShowEditTableDialog(true);
+  };
+
+  const closeEditTableDialog = () => {
+    setShowEditTableDialog(false);
+    setEditingTable(null);
+    setEditTableName('');
+  };
+
+  const handleUpdateTable = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editingTable || !editTableName.trim()) return;
+
+    try {
+      const response = await fetch('/api/admin/tables', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          id: editingTable.id, 
+          name: editTableName.trim()
+        }),
+      });
+
+      if (response.ok) {
+        closeEditTableDialog();
+        fetchData();
+      } else {
+        alert('Errore durante l\'aggiornamento del tavolo');
+      }
+    } catch (error) {
+      console.error('Error updating table:', error);
+      alert('Errore durante l\'aggiornamento del tavolo');
+    }
+  };
+
+  const handleDeleteTable = async (tableId: string, tableName: string) => {
+    if (!confirm(`Sei sicuro di voler eliminare il tavolo "${tableName}"? Questa azione non può essere annullata.`)) {
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/admin/tables', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: tableId }),
+      });
+
+      if (response.ok) {
+        fetchData();
+      } else {
+        const errorData = await response.json();
+        alert(`Errore: ${errorData.error || 'Impossibile eliminare il tavolo'}`);
+      }
+    } catch (error) {
+      console.error('Error deleting table:', error);
+      alert('Errore durante l\'eliminazione del tavolo');
+    }
+  };
+
+  // Edit Task Functions
+  const openEditTaskDialog = (task: Task) => {
+    setEditingTask(task);
+    setEditTaskDescription(task.description);
+    setEditTaskScore(task.score.toString());
+    setEditTaskActive(task.isActive);
+    setShowEditTaskDialog(true);
+  };
+
+  const closeEditTaskDialog = () => {
+    setShowEditTaskDialog(false);
+    setEditingTask(null);
+    setEditTaskDescription('');
+    setEditTaskScore('');
+    setEditTaskActive(true);
+  };
+
+  const handleUpdateTask = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editingTask || !editTaskDescription.trim()) return;
+
+    const score = parseInt(editTaskScore);
+    if (isNaN(score)) {
+      alert('Il punteggio deve essere un numero valido');
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/admin/tasks', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          id: editingTask.id, 
+          description: editTaskDescription.trim(),
+          score: score,
+          isActive: editTaskActive
+        }),
+      });
+
+      if (response.ok) {
+        closeEditTaskDialog();
+        fetchData();
+      } else {
+        alert('Errore durante l\'aggiornamento del task');
+      }
+    } catch (error) {
+      console.error('Error updating task:', error);
+      alert('Errore durante l\'aggiornamento del task');
+    }
+  };
+
+  const handleDeleteTask = async (taskId: string, taskDescription: string) => {
+    if (!confirm(`Sei sicuro di voler eliminare il task "${taskDescription}"? Questa azione eliminerà anche tutte le submission associate.`)) {
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/admin/tasks', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: taskId }),
+      });
+
+      if (response.ok) {
+        fetchData();
+      } else {
+        const errorData = await response.json();
+        alert(`Errore: ${errorData.error || 'Impossibile eliminare il task'}`);
+      }
+    } catch (error) {
+      console.error('Error deleting task:', error);
+      alert('Errore durante l\'eliminazione del task');
     }
   };
 
@@ -343,7 +491,7 @@ export default function AdminLeaderboardPage() {
                       <input
                         type="number"
                         value={table.score}
-                        onChange={(e) => handleUpdateTable(table, parseInt(e.target.value) || 0)}
+                        onChange={(e) => handleUpdateTableScore(table, parseInt(e.target.value) || 0)}
                         style={{
                           width: '100px',
                           padding: '8px',
@@ -366,28 +514,52 @@ export default function AdminLeaderboardPage() {
                       {table._count.users}
                     </td>
                     <td style={{ padding: '16px', textAlign: 'center' }}>
-                      <button
-                        style={{
-                          background: 'linear-gradient(135deg, var(--wedding-cerulean), var(--wedding-prussian))',
-                          color: 'white',
-                          border: 'none',
-                          borderRadius: '6px',
-                          padding: '8px 16px',
-                          fontSize: '0.9rem',
-                          cursor: 'pointer',
-                          fontWeight: '600',
-                          transition: 'all 0.2s ease'
-                        }}
-                        onClick={() => console.log('Edit table:', table.name)}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.transform = 'scale(1.05)';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.transform = 'scale(1)';
-                        }}
-                      >
-                        ✏️ Modifica
-                      </button>
+                      <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
+                        <button
+                          onClick={() => openEditTableDialog(table)}
+                          style={{
+                            background: 'linear-gradient(135deg, var(--wedding-cerulean), var(--wedding-prussian))',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '6px',
+                            padding: '8px 12px',
+                            fontSize: '0.85rem',
+                            cursor: 'pointer',
+                            fontWeight: '600',
+                            transition: 'all 0.2s ease'
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.transform = 'scale(1.05)';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.transform = 'scale(1)';
+                          }}
+                        >
+                          ✏️ Modifica
+                        </button>
+                        <button
+                          onClick={() => handleDeleteTable(table.id, table.name)}
+                          style={{
+                            background: 'linear-gradient(135deg, #dc2626, #b91c1c)',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '6px',
+                            padding: '8px 12px',
+                            fontSize: '0.85rem',
+                            cursor: 'pointer',
+                            fontWeight: '600',
+                            transition: 'all 0.2s ease'
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.transform = 'scale(1.05)';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.transform = 'scale(1)';
+                          }}
+                        >
+                          🗑️ Elimina
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -547,21 +719,234 @@ export default function AdminLeaderboardPage() {
                       {task._count.submissions}
                     </td>
                     <td style={{ padding: '16px', textAlign: 'center' }}>
-                      <button
-                        className={task.isActive ? 'btn-wedding-secondary' : 'btn-wedding-primary'}
-                        onClick={() => handleToggleTask(task)}
-                        style={{ 
-                          fontSize: '0.9rem',
-                          padding: '8px 16px'
-                        }}
-                      >
-                        {task.isActive ? '⏸️ Disattiva' : '▶️ Attiva'}
-                      </button>
+                      <div style={{ display: 'flex', gap: '6px', justifyContent: 'center', flexWrap: 'wrap' }}>
+                        <button
+                          onClick={() => openEditTaskDialog(task)}
+                          style={{
+                            background: 'linear-gradient(135deg, var(--wedding-cerulean), var(--wedding-prussian))',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '6px',
+                            padding: '6px 10px',
+                            fontSize: '0.8rem',
+                            cursor: 'pointer',
+                            fontWeight: '600',
+                            transition: 'all 0.2s ease'
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.transform = 'scale(1.05)';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.transform = 'scale(1)';
+                          }}
+                        >
+                          ✏️ Modifica
+                        </button>
+                        <button
+                          className={task.isActive ? 'btn-wedding-secondary' : 'btn-wedding-primary'}
+                          onClick={() => handleToggleTask(task)}
+                          style={{ 
+                            fontSize: '0.8rem',
+                            padding: '6px 10px'
+                          }}
+                        >
+                          {task.isActive ? '⏸️' : '▶️'}
+                        </button>
+                        <button
+                          onClick={() => handleDeleteTask(task.id, task.description)}
+                          style={{
+                            background: 'linear-gradient(135deg, #dc2626, #b91c1c)',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '6px',
+                            padding: '6px 10px',
+                            fontSize: '0.8rem',
+                            cursor: 'pointer',
+                            fontWeight: '600',
+                            transition: 'all 0.2s ease'
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.transform = 'scale(1.05)';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.transform = 'scale(1)';
+                          }}
+                        >
+                          🗑️
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
+          </div>
+        </div>
+      )}
+
+      {/* Edit Table Dialog */}
+      {showEditTableDialog && editingTable && (
+        <div className="modal-wedding">
+          <div className="modal-content-wedding" style={{ maxWidth: '500px', padding: '0' }}>
+            <div style={{
+              background: 'linear-gradient(135deg, var(--wedding-picton), var(--wedding-cerulean))',
+              color: 'white',
+              padding: '1.5rem',
+              borderRadius: '16px 16px 0 0',
+              textAlign: 'center'
+            }}>
+              <h3 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>
+                ✏️ Modifica Tavolo
+              </h3>
+            </div>
+            
+            <div style={{ padding: '2rem' }}>
+              <form onSubmit={handleUpdateTable}>
+                <div style={{ marginBottom: '1.5rem' }}>
+                  <label style={{ 
+                    display: 'block', 
+                    marginBottom: '0.5rem', 
+                    color: 'var(--wedding-prussian)', 
+                    fontWeight: '600' 
+                  }}>
+                    🏆 Nome Tavolo
+                  </label>
+                  <input
+                    type="text"
+                    value={editTableName}
+                    onChange={(e) => setEditTableName(e.target.value)}
+                    className="input-wedding"
+                    placeholder="Inserisci il nome del tavolo"
+                    required
+                    autoFocus
+                  />
+                </div>
+
+                <div style={{ display: 'flex', gap: '1rem', justifyContent: 'flex-end' }}>
+                  <button
+                    type="button"
+                    onClick={closeEditTableDialog}
+                    className="btn-wedding-outline"
+                  >
+                    ❌ Annulla
+                  </button>
+                  <button
+                    type="submit"
+                    className="btn-wedding-primary"
+                  >
+                    ✅ Salva Modifiche
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Edit Task Dialog */}
+      {showEditTaskDialog && editingTask && (
+        <div className="modal-wedding">
+          <div className="modal-content-wedding" style={{ maxWidth: '600px', padding: '0' }}>
+            <div style={{
+              background: 'linear-gradient(135deg, var(--wedding-picton), var(--wedding-cerulean))',
+              color: 'white',
+              padding: '1.5rem',
+              borderRadius: '16px 16px 0 0',
+              textAlign: 'center'
+            }}>
+              <h3 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>
+                ✏️ Modifica Task
+              </h3>
+            </div>
+            
+            <div style={{ padding: '2rem' }}>
+              <form onSubmit={handleUpdateTask}>
+                <div style={{ marginBottom: '1.5rem' }}>
+                  <label style={{ 
+                    display: 'block', 
+                    marginBottom: '0.5rem', 
+                    color: 'var(--wedding-prussian)', 
+                    fontWeight: '600' 
+                  }}>
+                    📋 Descrizione Task
+                  </label>
+                  <textarea
+                    value={editTaskDescription}
+                    onChange={(e) => setEditTaskDescription(e.target.value)}
+                    className="input-wedding"
+                    placeholder="Inserisci la descrizione del task"
+                    required
+                    autoFocus
+                    rows={3}
+                    style={{ resize: 'vertical', minHeight: '80px' }}
+                  />
+                </div>
+
+                <div style={{ marginBottom: '1.5rem' }}>
+                  <label style={{ 
+                    display: 'block', 
+                    marginBottom: '0.5rem', 
+                    color: 'var(--wedding-prussian)', 
+                    fontWeight: '600' 
+                  }}>
+                    🎯 Punteggio
+                  </label>
+                  <input
+                    type="number"
+                    value={editTaskScore}
+                    onChange={(e) => setEditTaskScore(e.target.value)}
+                    className="input-wedding"
+                    placeholder="Inserisci il punteggio (può essere negativo)"
+                    required
+                  />
+                  <small style={{ color: 'var(--wedding-cerulean)', fontSize: '0.85rem', marginTop: '0.25rem', display: 'block' }}>
+                    💡 Usa numeri positivi per premiare, negativi per penalizzare
+                  </small>
+                </div>
+
+                <div style={{ marginBottom: '1.5rem' }}>
+                  <label style={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    gap: '0.5rem',
+                    color: 'var(--wedding-prussian)', 
+                    fontWeight: '600',
+                    cursor: 'pointer'
+                  }}>
+                    <input
+                      type="checkbox"
+                      checked={editTaskActive}
+                      onChange={(e) => setEditTaskActive(e.target.checked)}
+                      style={{ 
+                        width: '18px', 
+                        height: '18px',
+                        accentColor: 'var(--wedding-picton)'
+                      }}
+                    />
+                    🔄 Task Attivo
+                  </label>
+                  <small style={{ color: 'var(--wedding-cerulean)', fontSize: '0.85rem', marginTop: '0.25rem', display: 'block', marginLeft: '1.5rem' }}>
+                    ℹ️ Solo i task attivi sono visibili agli utenti
+                  </small>
+                </div>
+
+                <div style={{ display: 'flex', gap: '1rem', justifyContent: 'flex-end' }}>
+                  <button
+                    type="button"
+                    onClick={closeEditTaskDialog}
+                    className="btn-wedding-outline"
+                  >
+                    ❌ Annulla
+                  </button>
+                  <button
+                    type="submit"
+                    className="btn-wedding-primary"
+                  >
+                    ✅ Salva Modifiche
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       )}

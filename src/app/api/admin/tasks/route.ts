@@ -102,8 +102,7 @@ export async function PUT(request: NextRequest) {
 // DELETE - Elimina un task
 export async function DELETE(request: NextRequest) {
   try {
-    const { searchParams } = new URL(request.url);
-    const id = searchParams.get('id');
+    const { id } = await request.json();
 
     if (!id) {
       return NextResponse.json(
@@ -112,6 +111,12 @@ export async function DELETE(request: NextRequest) {
       );
     }
 
+    // Prima elimina tutte le submission associate
+    await prisma.submission.deleteMany({
+      where: { taskId: id },
+    });
+
+    // Poi elimina il task
     await prisma.task.delete({
       where: { id },
     });
