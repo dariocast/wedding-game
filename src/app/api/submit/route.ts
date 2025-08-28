@@ -6,7 +6,11 @@ const prisma = new PrismaClient();
 
 // Verifica se le variabili d'ambiente di Supabase sono configurate
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+// Per Storage, preferiamo service_role key se disponibile
+const supabaseKey = supabaseServiceKey || supabaseAnonKey;
 const isSupabaseConfigured = supabaseUrl && supabaseKey;
 
 const supabase = isSupabaseConfigured ? createClient(supabaseUrl, supabaseKey) : null;
@@ -55,7 +59,9 @@ export async function POST(request: NextRequest) {
       console.log('🔧 Supabase Storage not configured, using placeholder');
       console.log('📋 Environment check:', {
         hasUrl: !!supabaseUrl,
-        hasKey: !!supabaseKey,
+        hasAnonKey: !!supabaseAnonKey,
+        hasServiceKey: !!supabaseServiceKey,
+        usingKey: supabaseServiceKey ? 'service_role' : 'anon',
         urlPreview: supabaseUrl ? `${supabaseUrl.substring(0, 30)}...` : 'MISSING',
       });
       fileUrl = `data:image/svg+xml;base64,${Buffer.from(`
