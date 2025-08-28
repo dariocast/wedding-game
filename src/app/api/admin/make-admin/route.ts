@@ -8,7 +8,7 @@ export async function POST(request: NextRequest) {
     const { username, secret } = await request.json();
 
     // Semplice protezione con una password segreta
-    if (secret !== 'wedding-admin-2024') {
+    if (secret !== 'game-admin-2025') {
       return NextResponse.json(
         { error: 'Secret non valido' },
         { status: 403 }
