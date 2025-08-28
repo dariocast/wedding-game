@@ -114,7 +114,15 @@ export default function GalleryPage() {
               {submissions.map((submission) => (
                 <div key={submission.id} className="four columns" style={{ marginBottom: '2rem' }}>
                   <div style={{ border: '1px solid #e1e1e1', borderRadius: '4px', padding: '1rem' }}>
-                    {submission.fileUrl.includes('placeholder') || submission.fileUrl.includes('via.placeholder.com') ? (
+                    {submission.fileUrl.startsWith('data:image/svg+xml') ? (
+                      // Mostra SVG embedded direttamente
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={submission.fileUrl}
+                        alt={submission.task.description}
+                        style={{ width: '100%', height: '200px', objectFit: 'contain', borderRadius: '4px' }}
+                      />
+                    ) : submission.fileUrl.includes('placeholder') || submission.fileUrl.includes('via.placeholder.com') ? (
                       // Mostra placeholder personalizzato per file mock
                       <div style={{ 
                         width: '100%', 
