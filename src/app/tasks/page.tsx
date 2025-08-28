@@ -17,10 +17,6 @@ export default function TasksPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    fetchTasks();
-  }, [fetchTasks]);
-
   const fetchTasks = useCallback(async () => {
     try {
       if (!session?.user?.id) {
@@ -46,6 +42,10 @@ export default function TasksPage() {
       setLoading(false);
     }
   }, [session]);
+
+  useEffect(() => {
+    fetchTasks();
+  }, [fetchTasks]);
 
   if (loading) {
     return (
