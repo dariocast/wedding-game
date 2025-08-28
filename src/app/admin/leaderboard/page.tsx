@@ -41,8 +41,8 @@ export default function AdminLeaderboardPage() {
   const [newTableName, setNewTableName] = useState('');
   const [newTaskDescription, setNewTaskDescription] = useState('');
   const [newTaskScore, setNewTaskScore] = useState('');
-  const [editingTable, setEditingTable] = useState<Table | null>(null);
-  const [editingTask, setEditingTask] = useState<Task | null>(null);
+  // const [editingTable, setEditingTable] = useState<Table | null>(null);
+  // const [editingTask, setEditingTask] = useState<Task | null>(null);
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -263,7 +263,7 @@ export default function AdminLeaderboardPage() {
                         <button
                           className="button"
                           style={{ fontSize: '0.8em' }}
-                          onClick={() => setEditingTable(table)}
+                          onClick={() => console.log('Edit table:', table.name)}
                         >
                           ✏️ Modifica
                         </button>

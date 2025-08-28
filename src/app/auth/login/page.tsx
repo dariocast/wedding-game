@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { signIn, getSession } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
@@ -31,9 +31,9 @@ export default function LoginPage() {
         router.push('/');
         router.refresh();
       }
-    } catch (err) {
-      setError('Errore durante il login');
-    } finally {
+          } catch {
+        setError('Errore durante il login');
+      } finally {
       setLoading(false);
     }
   };

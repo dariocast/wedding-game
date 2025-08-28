@@ -115,6 +115,7 @@ export default function GalleryPage() {
                 <div key={submission.id} className="four columns" style={{ marginBottom: '2rem' }}>
                   <div style={{ border: '1px solid #e1e1e1', borderRadius: '4px', padding: '1rem' }}>
                     {submission.fileType === 'image' ? (
+                      // eslint-disable-next-line @next/next/no-img-element
                       <img
                         src={submission.fileUrl}
                         alt={submission.task.description}

@@ -76,7 +76,7 @@ export default function RegisterPage() {
         const errorData = await response.json();
         setError(errorData.error || 'Errore durante la registrazione');
       }
-    } catch (err) {
+    } catch {
       setError('Errore di connessione');
     } finally {
       setLoading(false);

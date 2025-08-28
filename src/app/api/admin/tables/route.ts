@@ -81,7 +81,7 @@ export async function PUT(request: NextRequest) {
       );
     }
 
-    const updateData: any = {};
+    const updateData: { name?: string; score?: number } = {};
     if (name !== undefined) updateData.name = name;
     if (score !== undefined) updateData.score = parseInt(score);
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
@@ -25,9 +25,9 @@ export default function SubmitTaskPage() {
 
   useEffect(() => {
     fetchTask();
-  }, [taskId]);
+  }, [taskId, fetchTask]);
 
-  const fetchTask = async () => {
+  const fetchTask = useCallback(async () => {
     try {
       const response = await fetch('/api/tasks');
       if (response.ok) {
@@ -39,12 +39,12 @@ export default function SubmitTaskPage() {
           setError('Task non trovato');
         }
       }
-    } catch (err) {
+    } catch {
       setError('Errore nel caricamento del task');
     } finally {
       setLoading(false);
     }
-  };
+  }, [taskId]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -90,7 +90,7 @@ export default function SubmitTaskPage() {
         const errorData = await response.json();
         setError(errorData.error || 'Errore durante l\'invio');
       }
-    } catch (err) {
+    } catch {
       setError('Errore di connessione');
     } finally {
       setSubmitting(false);

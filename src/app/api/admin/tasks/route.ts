@@ -75,7 +75,7 @@ export async function PUT(request: NextRequest) {
       );
     }
 
-    const updateData: any = {};
+    const updateData: { description?: string; score?: number; isActive?: boolean } = {};
     if (description !== undefined) updateData.description = description;
     if (score !== undefined) updateData.score = parseInt(score);
     if (isActive !== undefined) updateData.isActive = isActive;
