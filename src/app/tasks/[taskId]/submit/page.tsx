@@ -23,10 +23,6 @@ export default function SubmitTaskPage() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
 
-  useEffect(() => {
-    fetchTask();
-  }, [taskId, fetchTask]);
-
   const fetchTask = useCallback(async () => {
     try {
       const response = await fetch('/api/tasks');
@@ -45,6 +41,10 @@ export default function SubmitTaskPage() {
       setLoading(false);
     }
   }, [taskId]);
+
+  useEffect(() => {
+    fetchTask();
+  }, [fetchTask]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
