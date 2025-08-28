@@ -163,7 +163,7 @@ export default function GalleryPage() {
                     )}
                     
                     {/* Fallback per file non caricabili */}
-                    <div style={{ display: 'none', width: '100%', height: '200px', backgroundColor: '#f5f5f5', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '4px' }}>
+                    <div style={{ display: 'none', width: '100%', height: '200px', backgroundColor: '#f5f5f5', alignItems: 'center', justifyContent: 'center', borderRadius: '4px' }}>
                       <span style={{ color: '#666' }}>
                         {submission.fileType === 'image' ? '🖼️' : '🎥'} File non disponibile
                       </span>
