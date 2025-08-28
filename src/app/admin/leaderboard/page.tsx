@@ -166,12 +166,24 @@ export default function AdminLeaderboardPage() {
 
   if (status === 'loading' || loading) {
     return (
-      <div className="container" style={{ marginTop: '2rem' }}>
-        <div className="row">
-          <div className="twelve columns">
-            <h1>📊 Gestione Classifica</h1>
-            <p>Caricamento...</p>
+      <div className="animate-fade-in">
+        <section className="text-center mb-4">
+          <div className="animate-float" style={{ marginBottom: '2rem' }}>
+            <span style={{ fontSize: '4rem', display: 'block', marginBottom: '1rem' }}>📊</span>
           </div>
+          <h1 className="heading-wedding" style={{ fontSize: 'clamp(2.5rem, 4vw, 3.5rem)' }}>
+            Gestione Avanzata
+          </h1>
+          <div className="wedding-divider"></div>
+        </section>
+
+        <div className="card-wedding text-center">
+          <div className="animate-float">
+            <span style={{ fontSize: '3rem', display: 'block', marginBottom: '1rem' }}>⏳</span>
+          </div>
+          <p style={{ color: 'var(--wedding-cerulean)', fontSize: '1.1rem' }}>
+            Caricamento pannello gestione...
+          </p>
         </div>
       </div>
     );
@@ -182,27 +194,55 @@ export default function AdminLeaderboardPage() {
   }
 
   return (
-    <div className="container" style={{ marginTop: '2rem' }}>
-      <div className="row">
-        <div className="twelve columns">
-          <h1>📊 Gestione Classifica</h1>
-          <p className="lead">Gestisci tavoli, task e punteggi</p>
+    <div className="animate-fade-in">
+      {/* Hero Section */}
+      <section className="text-center mb-4">
+        <div className="animate-float" style={{ marginBottom: '2rem' }}>
+          <span style={{ fontSize: '4rem', display: 'block', marginBottom: '1rem' }}>📊</span>
         </div>
-      </div>
+        <h1 className="heading-wedding" style={{ fontSize: 'clamp(2.5rem, 4vw, 3.5rem)' }}>
+          Gestione Avanzata
+        </h1>
+        <p style={{ 
+          fontSize: '1.1rem', 
+          color: 'var(--wedding-prussian)', 
+          maxWidth: '600px', 
+          margin: '0 auto 2rem auto',
+          lineHeight: '1.6'
+        }}>
+          Gestisci tavoli, task e punteggi del Wedding Game! 🎯
+        </p>
+        <div className="wedding-divider"></div>
+      </section>
 
       {/* Tab Navigation */}
-      <div className="row">
-        <div className="twelve columns">
+      <div className="text-center mb-4">
+        <div style={{ 
+          display: 'inline-flex', 
+          background: 'rgba(255, 255, 255, 0.9)',
+          borderRadius: '12px',
+          padding: '8px',
+          border: '1px solid rgba(0, 167, 225, 0.2)',
+          boxShadow: '0 4px 15px rgba(0, 167, 225, 0.1)'
+        }}>
           <button
-            className={`button ${activeTab === 'tables' ? 'button-primary' : ''}`}
+            className={activeTab === 'tables' ? 'btn-wedding-primary' : 'btn-wedding-outline'}
             onClick={() => setActiveTab('tables')}
-            style={{ marginRight: '1rem' }}
+            style={{ 
+              marginRight: '8px',
+              fontSize: '1rem',
+              padding: '12px 24px'
+            }}
           >
             🏆 Tavoli
           </button>
           <button
-            className={`button ${activeTab === 'tasks' ? 'button-primary' : ''}`}
+            className={activeTab === 'tasks' ? 'btn-wedding-primary' : 'btn-wedding-outline'}
             onClick={() => setActiveTab('tasks')}
+            style={{ 
+              fontSize: '1rem',
+              padding: '12px 24px'
+            }}
           >
             📋 Task
           </button>
@@ -211,155 +251,334 @@ export default function AdminLeaderboardPage() {
 
       {/* Tables Tab */}
       {activeTab === 'tables' && (
-        <>
-          <div className="row" style={{ marginTop: '2rem' }}>
-            <div className="twelve columns">
-              <h3>Gestione Tavoli</h3>
-              
-              {/* Create new table form */}
-              <form onSubmit={handleCreateTable} style={{ marginBottom: '2rem' }}>
-                <div className="row">
-                  <div className="eight columns">
-                    <input
-                      type="text"
-                      placeholder="Nome nuovo tavolo"
-                      value={newTableName}
-                      onChange={(e) => setNewTableName(e.target.value)}
-                      className="u-full-width"
-                    />
-                  </div>
-                  <div className="four columns">
-                    <button type="submit" className="button button-primary u-full-width">
-                      Aggiungi Tavolo
-                    </button>
-                  </div>
-                </div>
-              </form>
-
-              {/* Tables list */}
-              <table className="u-full-width">
-                <thead>
-                  <tr>
-                    <th>Tavolo</th>
-                    <th>Punteggio</th>
-                    <th>Partecipanti</th>
-                    <th>Azioni</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {tables.map((table) => (
-                    <tr key={table.id}>
-                      <td>{table.name}</td>
-                      <td>
-                        <input
-                          type="number"
-                          value={table.score}
-                          onChange={(e) => handleUpdateTable(table, parseInt(e.target.value) || 0)}
-                          style={{ width: '80px' }}
-                        />
-                      </td>
-                      <td>{table._count.users}</td>
-                      <td>
-                        <button
-                          className="button"
-                          style={{ fontSize: '0.8em' }}
-                          onClick={() => console.log('Edit table:', table.name)}
-                        >
-                          ✏️ Modifica
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+        <div className="card-wedding">
+          <div className="text-center mb-3">
+            <h3 style={{ 
+              color: 'var(--wedding-prussian)', 
+              fontSize: '1.8rem', 
+              marginBottom: '1rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '0.5rem'
+            }}>
+              🏆 Gestione Tavoli
+            </h3>
           </div>
-        </>
+          
+          {/* Create Table Form */}
+          <form onSubmit={handleCreateTable} className="mb-4">
+            <div style={{
+              background: 'linear-gradient(135deg, rgba(0, 167, 225, 0.1), rgba(0, 126, 167, 0.05))',
+              border: '1px solid rgba(0, 167, 225, 0.2)',
+              borderRadius: '12px',
+              padding: '1.5rem',
+              marginBottom: '2rem'
+            }}>
+              <h4 style={{ color: 'var(--wedding-prussian)', marginBottom: '1rem' }}>
+                ➕ Aggiungi Nuovo Tavolo
+              </h4>
+              <div className="grid-wedding-2" style={{ gap: '1rem', alignItems: 'end' }}>
+                <div>
+                  <label style={{ 
+                    display: 'block', 
+                    marginBottom: '0.5rem', 
+                    color: 'var(--wedding-prussian)', 
+                    fontWeight: '600' 
+                  }}>
+                    Nome Tavolo
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="es. Tavolo degli Sposi"
+                    value={newTableName}
+                    onChange={(e) => setNewTableName(e.target.value)}
+                    className="input-wedding"
+                    required
+                  />
+                </div>
+                <div>
+                  <button type="submit" className="btn-wedding-primary w-full">
+                    🏆 Crea Tavolo
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          {/* Tables List */}
+          <div style={{ overflowX: 'auto' }}>
+            <table style={{ 
+              width: '100%', 
+              borderCollapse: 'collapse',
+              backgroundColor: 'rgba(255, 255, 255, 0.5)',
+              borderRadius: '8px',
+              overflow: 'hidden'
+            }}>
+              <thead>
+                <tr style={{ 
+                  background: 'linear-gradient(135deg, var(--wedding-picton), var(--wedding-cerulean))',
+                  color: 'white'
+                }}>
+                  <th style={{ padding: '16px', textAlign: 'left', fontWeight: '600' }}>🏆 Tavolo</th>
+                  <th style={{ padding: '16px', textAlign: 'center', fontWeight: '600' }}>🎯 Punteggio</th>
+                  <th style={{ padding: '16px', textAlign: 'center', fontWeight: '600' }}>👥 Partecipanti</th>
+                  <th style={{ padding: '16px', textAlign: 'center', fontWeight: '600' }}>⚡ Azioni</th>
+                </tr>
+              </thead>
+              <tbody>
+                {tables.map((table, index) => (
+                  <tr key={table.id} style={{ 
+                    borderBottom: '1px solid rgba(0, 167, 225, 0.1)',
+                    backgroundColor: index % 2 === 0 ? 'rgba(0, 167, 225, 0.02)' : 'transparent'
+                  }}>
+                    <td style={{ 
+                      padding: '16px', 
+                      fontWeight: '600',
+                      color: 'var(--wedding-prussian)'
+                    }}>
+                      {table.name}
+                    </td>
+                    <td style={{ padding: '16px', textAlign: 'center' }}>
+                      <input
+                        type="number"
+                        value={table.score}
+                        onChange={(e) => handleUpdateTable(table, parseInt(e.target.value) || 0)}
+                        style={{
+                          width: '100px',
+                          padding: '8px',
+                          border: '2px solid rgba(0, 167, 225, 0.3)',
+                          borderRadius: '6px',
+                          textAlign: 'center',
+                          fontWeight: '700',
+                          color: 'var(--wedding-prussian)',
+                          backgroundColor: 'rgba(255, 255, 255, 0.9)'
+                        }}
+                      />
+                    </td>
+                    <td style={{ 
+                      padding: '16px', 
+                      textAlign: 'center',
+                      color: 'var(--wedding-cerulean)',
+                      fontWeight: '600',
+                      fontSize: '1.1rem'
+                    }}>
+                      {table._count.users}
+                    </td>
+                    <td style={{ padding: '16px', textAlign: 'center' }}>
+                      <button
+                        style={{
+                          background: 'linear-gradient(135deg, var(--wedding-cerulean), var(--wedding-prussian))',
+                          color: 'white',
+                          border: 'none',
+                          borderRadius: '6px',
+                          padding: '8px 16px',
+                          fontSize: '0.9rem',
+                          cursor: 'pointer',
+                          fontWeight: '600',
+                          transition: 'all 0.2s ease'
+                        }}
+                        onClick={() => console.log('Edit table:', table.name)}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.transform = 'scale(1.05)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.transform = 'scale(1)';
+                        }}
+                      >
+                        ✏️ Modifica
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       )}
 
       {/* Tasks Tab */}
       {activeTab === 'tasks' && (
-        <>
-          <div className="row" style={{ marginTop: '2rem' }}>
-            <div className="twelve columns">
-              <h3>Gestione Task</h3>
-              
-              {/* Create new task form */}
-              <form onSubmit={handleCreateTask} style={{ marginBottom: '2rem' }}>
-                <div className="row">
-                  <div className="six columns">
-                    <input
-                      type="text"
-                      placeholder="Descrizione task"
-                      value={newTaskDescription}
-                      onChange={(e) => setNewTaskDescription(e.target.value)}
-                      className="u-full-width"
-                    />
-                  </div>
-                  <div className="three columns">
-                    <input
-                      type="number"
-                      placeholder="Punteggio"
-                      value={newTaskScore}
-                      onChange={(e) => setNewTaskScore(e.target.value)}
-                      className="u-full-width"
-                    />
-                  </div>
-                  <div className="three columns">
-                    <button type="submit" className="button button-primary u-full-width">
-                      Aggiungi Task
-                    </button>
-                  </div>
-                </div>
-              </form>
-
-              {/* Tasks list */}
-              <table className="u-full-width">
-                <thead>
-                  <tr>
-                    <th>Descrizione</th>
-                    <th>Punteggio</th>
-                    <th>Stato</th>
-                    <th>Completamenti</th>
-                    <th>Azioni</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {tasks.map((task) => (
-                    <tr key={task.id}>
-                      <td>{task.description}</td>
-                      <td style={{ color: task.score >= 0 ? 'green' : 'red' }}>
-                        {task.score >= 0 ? '+' : ''}{task.score}
-                      </td>
-                      <td>
-                        <span style={{ color: task.isActive ? 'green' : 'red' }}>
-                          {task.isActive ? '✅ Attivo' : '❌ Disattivo'}
-                        </span>
-                      </td>
-                      <td>{task._count.submissions}</td>
-                      <td>
-                        <button
-                          className={`button ${task.isActive ? '' : 'button-primary'}`}
-                          style={{ fontSize: '0.8em', marginRight: '0.5rem' }}
-                          onClick={() => handleToggleTask(task)}
-                        >
-                          {task.isActive ? '⏸️ Disattiva' : '▶️ Attiva'}
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+        <div className="card-wedding">
+          <div className="text-center mb-3">
+            <h3 style={{ 
+              color: 'var(--wedding-prussian)', 
+              fontSize: '1.8rem', 
+              marginBottom: '1rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '0.5rem'
+            }}>
+              📋 Gestione Task
+            </h3>
           </div>
-        </>
+          
+          {/* Create Task Form */}
+          <form onSubmit={handleCreateTask} className="mb-4">
+            <div style={{
+              background: 'linear-gradient(135deg, rgba(0, 126, 167, 0.1), rgba(0, 52, 89, 0.05))',
+              border: '1px solid rgba(0, 126, 167, 0.2)',
+              borderRadius: '12px',
+              padding: '1.5rem',
+              marginBottom: '2rem'
+            }}>
+              <h4 style={{ color: 'var(--wedding-prussian)', marginBottom: '1rem' }}>
+                ➕ Aggiungi Nuovo Task
+              </h4>
+              <div className="grid-wedding-3" style={{ gap: '1rem', alignItems: 'end' }}>
+                <div>
+                  <label style={{ 
+                    display: 'block', 
+                    marginBottom: '0.5rem', 
+                    color: 'var(--wedding-prussian)', 
+                    fontWeight: '600' 
+                  }}>
+                    Descrizione Task
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="es. Scatta una foto con gli sposi"
+                    value={newTaskDescription}
+                    onChange={(e) => setNewTaskDescription(e.target.value)}
+                    className="input-wedding"
+                    required
+                  />
+                </div>
+                <div>
+                  <label style={{ 
+                    display: 'block', 
+                    marginBottom: '0.5rem', 
+                    color: 'var(--wedding-prussian)', 
+                    fontWeight: '600' 
+                  }}>
+                    Punteggio
+                  </label>
+                  <input
+                    type="number"
+                    placeholder="10"
+                    value={newTaskScore}
+                    onChange={(e) => setNewTaskScore(e.target.value)}
+                    className="input-wedding"
+                    required
+                  />
+                </div>
+                <div>
+                  <button type="submit" className="btn-wedding-primary w-full">
+                    📋 Crea Task
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          {/* Tasks List */}
+          <div style={{ overflowX: 'auto' }}>
+            <table style={{ 
+              width: '100%', 
+              borderCollapse: 'collapse',
+              backgroundColor: 'rgba(255, 255, 255, 0.5)',
+              borderRadius: '8px',
+              overflow: 'hidden'
+            }}>
+              <thead>
+                <tr style={{ 
+                  background: 'linear-gradient(135deg, var(--wedding-cerulean), var(--wedding-prussian))',
+                  color: 'white'
+                }}>
+                  <th style={{ padding: '16px', textAlign: 'left', fontWeight: '600' }}>📋 Descrizione</th>
+                  <th style={{ padding: '16px', textAlign: 'center', fontWeight: '600' }}>🎯 Punti</th>
+                  <th style={{ padding: '16px', textAlign: 'center', fontWeight: '600' }}>🔄 Stato</th>
+                  <th style={{ padding: '16px', textAlign: 'center', fontWeight: '600' }}>✅ Completati</th>
+                  <th style={{ padding: '16px', textAlign: 'center', fontWeight: '600' }}>⚡ Azioni</th>
+                </tr>
+              </thead>
+              <tbody>
+                {tasks.map((task, index) => (
+                  <tr key={task.id} style={{ 
+                    borderBottom: '1px solid rgba(0, 167, 225, 0.1)',
+                    backgroundColor: index % 2 === 0 ? 'rgba(0, 167, 225, 0.02)' : 'transparent'
+                  }}>
+                    <td style={{ 
+                      padding: '16px',
+                      color: 'var(--wedding-black)',
+                      maxWidth: '300px',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap'
+                    }}>
+                      {task.description}
+                    </td>
+                    <td style={{ 
+                      padding: '16px', 
+                      textAlign: 'center',
+                      fontWeight: '700',
+                      fontSize: '1.1rem',
+                      color: task.score >= 0 ? '#28a745' : '#dc3545'
+                    }}>
+                      {task.score >= 0 ? '+' : ''}{task.score}
+                    </td>
+                    <td style={{ padding: '16px', textAlign: 'center' }}>
+                      <div style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        padding: '4px 12px',
+                        borderRadius: '15px',
+                        background: task.isActive 
+                          ? 'linear-gradient(135deg, rgba(40, 167, 69, 0.1), rgba(40, 167, 69, 0.05))'
+                          : 'linear-gradient(135deg, rgba(220, 53, 69, 0.1), rgba(220, 53, 69, 0.05))',
+                        border: task.isActive 
+                          ? '1px solid rgba(40, 167, 69, 0.3)'
+                          : '1px solid rgba(220, 53, 69, 0.3)',
+                        fontSize: '0.85rem',
+                        fontWeight: '600',
+                        color: task.isActive ? '#28a745' : '#dc3545'
+                      }}>
+                        {task.isActive ? '✅ Attivo' : '❌ Disattivo'}
+                      </div>
+                    </td>
+                    <td style={{ 
+                      padding: '16px', 
+                      textAlign: 'center',
+                      color: 'var(--wedding-cerulean)',
+                      fontWeight: '600',
+                      fontSize: '1.1rem'
+                    }}>
+                      {task._count.submissions}
+                    </td>
+                    <td style={{ padding: '16px', textAlign: 'center' }}>
+                      <button
+                        className={task.isActive ? 'btn-wedding-secondary' : 'btn-wedding-primary'}
+                        onClick={() => handleToggleTask(task)}
+                        style={{ 
+                          fontSize: '0.9rem',
+                          padding: '8px 16px'
+                        }}
+                      >
+                        {task.isActive ? '⏸️ Disattiva' : '▶️ Attiva'}
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       )}
 
-      <div className="row" style={{ marginTop: '2rem' }}>
-        <div className="twelve columns">
-          <Link href="/admin" className="button">
-            ← Torna al Pannello Admin
-          </Link>
+      {/* Back Button */}
+      <div className="text-center" style={{ marginTop: '3rem' }}>
+        <Link href="/admin" className="btn-wedding-outline">
+          ← Torna al Pannello Admin
+        </Link>
+      </div>
+
+      {/* Decorative Elements */}
+      <div className="text-center" style={{ marginTop: '3rem' }}>
+        <div className="flex justify-center items-center space-x-2">
+          <span className="animate-float" style={{ fontSize: '1.5rem', animationDelay: '0s' }}>📊</span>
+          <span className="animate-float" style={{ fontSize: '1rem', animationDelay: '0.5s' }}>⚙️</span>
+          <span className="animate-float" style={{ fontSize: '1.5rem', animationDelay: '1s' }}>🏆</span>
         </div>
       </div>
     </div>

@@ -102,12 +102,24 @@ export default function AdminPage() {
 
   if (status === 'loading') {
     return (
-      <div className="container" style={{ marginTop: '2rem' }}>
-        <div className="row">
-          <div className="twelve columns">
-            <h1>⚙️ Pannello Amministrazione</h1>
-            <p>Caricamento...</p>
+      <div className="animate-fade-in">
+        <section className="text-center mb-4">
+          <div className="animate-float" style={{ marginBottom: '2rem' }}>
+            <span style={{ fontSize: '4rem', display: 'block', marginBottom: '1rem' }}>⚙️</span>
           </div>
+          <h1 className="heading-wedding" style={{ fontSize: 'clamp(2.5rem, 4vw, 3.5rem)' }}>
+            Pannello Admin
+          </h1>
+          <div className="wedding-divider"></div>
+        </section>
+
+        <div className="card-wedding text-center">
+          <div className="animate-float">
+            <span style={{ fontSize: '3rem', display: 'block', marginBottom: '1rem' }}>⏳</span>
+          </div>
+          <p style={{ color: 'var(--wedding-cerulean)', fontSize: '1.1rem' }}>
+            Caricamento pannello amministrazione...
+          </p>
         </div>
       </div>
     );
@@ -118,113 +130,279 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="container" style={{ marginTop: '2rem' }}>
-      <div className="row">
-        <div className="twelve columns">
-          <h1>⚙️ Pannello Amministrazione</h1>
-          <p className="lead">
-            Gestisci il Wedding Game e monitora le attività dei partecipanti
-          </p>
+    <div className="animate-fade-in">
+      {/* Hero Section */}
+      <section className="text-center mb-4">
+        <div className="animate-float" style={{ marginBottom: '2rem' }}>
+          <span style={{ fontSize: '4rem', display: 'block', marginBottom: '1rem' }}>⚙️</span>
         </div>
-      </div>
+        <h1 className="heading-wedding" style={{ fontSize: 'clamp(2.5rem, 4vw, 3.5rem)' }}>
+          Pannello Admin
+        </h1>
+        <p style={{ 
+          fontSize: '1.1rem', 
+          color: 'var(--wedding-prussian)', 
+          maxWidth: '600px', 
+          margin: '0 auto 2rem auto',
+          lineHeight: '1.6'
+        }}>
+          Gestisci il Wedding Game e monitora le attività dei partecipanti! 👑
+        </p>
+        <div className="wedding-divider"></div>
+      </section>
 
-      <div className="row">
-        <div className="six columns">
-          <h3>🎮 Controllo del Gioco</h3>
-          <div className="row">
-            <div className="twelve columns">
-              <button
-                onClick={toggleGamePause}
-                className={`button u-full-width ${gamePaused ? 'button-primary' : 'button-danger'}`}
-              >
-                {gamePaused ? '▶️ Riavvia Gioco' : '⏸️ Pausa Gioco'}
-              </button>
-            </div>
+      {/* Admin Controls Grid */}
+      <div className="grid-wedding grid-wedding-2 mb-4">
+        {/* Game Control Card */}
+        <div className="card-wedding">
+          <div className="text-center mb-3">
+            <h3 style={{ 
+              color: 'var(--wedding-prussian)', 
+              fontSize: '1.8rem', 
+              marginBottom: '1rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '0.5rem'
+            }}>
+              🎮 Controllo Gioco
+            </h3>
           </div>
           
-          <div style={{ marginTop: '1rem' }}>
-            <Link href="/admin/leaderboard" className="button u-full-width">
-              📊 Gestisci Classifica
+          <div className="space-y-2">
+            <button
+              onClick={toggleGamePause}
+              className={gamePaused ? 'btn-wedding-primary w-full' : 'btn-wedding-secondary w-full'}
+              style={{ 
+                fontSize: '1.1rem',
+                padding: '1rem'
+              }}
+            >
+              {gamePaused ? '▶️ Riavvia Gioco' : '⏸️ Pausa Gioco'}
+            </button>
+            
+            <Link 
+              href="/admin/leaderboard" 
+              className="btn-wedding-outline w-full block text-center"
+              style={{ marginTop: '1rem' }}
+            >
+              📊 Gestisci Classifica & Task
             </Link>
           </div>
         </div>
 
-        <div className="six columns">
-          <h3>📊 Statistiche</h3>
-          <div className="row">
-            <div className="six columns">
-              <div style={{ textAlign: 'center', padding: '1rem', backgroundColor: '#f5f5f5', borderRadius: '4px' }}>
-                <h4>{submissions.length}</h4>
-                <p>Submission Totali</p>
+        {/* Statistics Card */}
+        <div className="card-wedding">
+          <div className="text-center mb-3">
+            <h3 style={{ 
+              color: 'var(--wedding-prussian)', 
+              fontSize: '1.8rem', 
+              marginBottom: '1rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '0.5rem'
+            }}>
+              📊 Statistiche Live
+            </h3>
+          </div>
+          
+          <div className="grid-wedding-2" style={{ gap: '1rem' }}>
+            <div style={{ 
+              textAlign: 'center', 
+              padding: '1.5rem', 
+              background: 'linear-gradient(135deg, rgba(0, 167, 225, 0.1), rgba(0, 126, 167, 0.05))',
+              border: '1px solid rgba(0, 167, 225, 0.2)',
+              borderRadius: '12px'
+            }}>
+              <div style={{ 
+                fontSize: '2.5rem', 
+                fontWeight: 'bold', 
+                color: 'var(--wedding-picton)',
+                marginBottom: '0.5rem'
+              }}>
+                {submissions.length}
               </div>
+              <p style={{ color: 'var(--wedding-prussian)', fontWeight: '600', margin: 0 }}>
+                📤 Submission Totali
+              </p>
             </div>
-            <div className="six columns">
-              <div style={{ textAlign: 'center', padding: '1rem', backgroundColor: '#f5f5f5', borderRadius: '4px' }}>
-                <h4>{new Set(submissions.map(s => s.user.username)).size}</h4>
-                <p>Partecipanti Attivi</p>
+            
+            <div style={{ 
+              textAlign: 'center', 
+              padding: '1.5rem', 
+              background: 'linear-gradient(135deg, rgba(0, 126, 167, 0.1), rgba(0, 52, 89, 0.05))',
+              border: '1px solid rgba(0, 126, 167, 0.2)',
+              borderRadius: '12px'
+            }}>
+              <div style={{ 
+                fontSize: '2.5rem', 
+                fontWeight: 'bold', 
+                color: 'var(--wedding-cerulean)',
+                marginBottom: '0.5rem'
+              }}>
+                {new Set(submissions.map(s => s.user.username)).size}
               </div>
+              <p style={{ color: 'var(--wedding-prussian)', fontWeight: '600', margin: 0 }}>
+                👥 Partecipanti Attivi
+              </p>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="row" style={{ marginTop: '2rem' }}>
-        <div className="twelve columns">
-          <h3>📋 Tutte le Submission</h3>
-          
-          {loading ? (
-            <p>Caricamento submission...</p>
-          ) : submissions.length === 0 ? (
-            <div className="alert alert-info">
-              <strong>Nessuna submission ancora!</strong>
-              <p>I partecipanti devono completare i task per vedere le submission qui.</p>
-            </div>
-          ) : (
-            <div className="u-full-width">
-              <table className="u-full-width">
-                <thead>
-                  <tr>
-                    <th>Utente</th>
-                    <th>Tavolo</th>
-                    <th>Task</th>
-                    <th>Punteggio</th>
-                    <th>Data</th>
-                    <th>Azioni</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {submissions.map((submission) => (
-                    <tr key={submission.id}>
-                      <td>{submission.user.username}</td>
-                      <td>{submission.user.table.name}</td>
-                      <td>{submission.task.description}</td>
-                      <td style={{ color: submission.task.score >= 0 ? 'green' : 'red' }}>
-                        {submission.task.score >= 0 ? '+' : ''}{submission.task.score}
-                      </td>
-                      <td>{new Date(submission.createdAt).toLocaleDateString('it-IT')}</td>
-                      <td>
-                        <button
-                          onClick={() => handleDeleteSubmission(submission.id)}
-                          className="button button-danger"
-                          style={{ fontSize: '0.8em' }}
-                        >
-                          🗑️ Elimina
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
+      {/* Submissions Management */}
+      <div className="card-wedding">
+        <div className="text-center mb-3">
+          <h3 style={{ 
+            color: 'var(--wedding-prussian)', 
+            fontSize: '1.8rem', 
+            marginBottom: '1rem',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '0.5rem'
+          }}>
+            📋 Gestione Submission
+          </h3>
         </div>
+        
+        {loading ? (
+          <div className="text-center p-4">
+            <div className="animate-float">
+              <span style={{ fontSize: '2rem', display: 'block', marginBottom: '1rem' }}>⏳</span>
+            </div>
+            <p style={{ color: 'var(--wedding-cerulean)' }}>
+              Caricamento submission...
+            </p>
+          </div>
+        ) : submissions.length === 0 ? (
+          <div style={{
+            background: 'linear-gradient(135deg, rgba(0, 167, 225, 0.1), rgba(0, 126, 167, 0.05))',
+            border: '1px solid rgba(0, 167, 225, 0.3)',
+            borderRadius: '8px',
+            padding: '2rem',
+            textAlign: 'center'
+          }}>
+            <span style={{ fontSize: '3rem', display: 'block', marginBottom: '1rem' }}>📭</span>
+            <h4 style={{ color: 'var(--wedding-prussian)', marginBottom: '1rem' }}>Nessuna Submission</h4>
+            <p style={{ color: 'var(--wedding-cerulean)' }}>
+              I partecipanti devono completare i task per vedere le submission qui.
+            </p>
+          </div>
+        ) : (
+          <div style={{ overflowX: 'auto' }}>
+            <table style={{ 
+              width: '100%', 
+              borderCollapse: 'collapse',
+              backgroundColor: 'rgba(255, 255, 255, 0.5)',
+              borderRadius: '8px',
+              overflow: 'hidden'
+            }}>
+              <thead>
+                <tr style={{ 
+                  background: 'linear-gradient(135deg, var(--wedding-picton), var(--wedding-cerulean))',
+                  color: 'white'
+                }}>
+                  <th style={{ padding: '12px', textAlign: 'left', fontWeight: '600' }}>👤 Utente</th>
+                  <th style={{ padding: '12px', textAlign: 'left', fontWeight: '600' }}>🏆 Tavolo</th>
+                  <th style={{ padding: '12px', textAlign: 'left', fontWeight: '600' }}>📋 Task</th>
+                  <th style={{ padding: '12px', textAlign: 'center', fontWeight: '600' }}>🎯 Punti</th>
+                  <th style={{ padding: '12px', textAlign: 'center', fontWeight: '600' }}>📅 Data</th>
+                  <th style={{ padding: '12px', textAlign: 'center', fontWeight: '600' }}>⚡ Azioni</th>
+                </tr>
+              </thead>
+              <tbody>
+                {submissions.map((submission, index) => (
+                  <tr key={submission.id} style={{ 
+                    borderBottom: '1px solid rgba(0, 167, 225, 0.1)',
+                    backgroundColor: index % 2 === 0 ? 'rgba(0, 167, 225, 0.02)' : 'transparent'
+                  }}>
+                    <td style={{ 
+                      padding: '12px', 
+                      fontWeight: '600',
+                      color: 'var(--wedding-prussian)'
+                    }}>
+                      {submission.user.username}
+                    </td>
+                    <td style={{ 
+                      padding: '12px',
+                      color: 'var(--wedding-cerulean)',
+                      fontWeight: '500'
+                    }}>
+                      {submission.user.table.name}
+                    </td>
+                    <td style={{ 
+                      padding: '12px',
+                      color: 'var(--wedding-black)',
+                      maxWidth: '200px',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap'
+                    }}>
+                      {submission.task.description}
+                    </td>
+                    <td style={{ 
+                      padding: '12px', 
+                      textAlign: 'center',
+                      fontWeight: '700',
+                      color: submission.task.score >= 0 ? '#28a745' : '#dc3545'
+                    }}>
+                      {submission.task.score >= 0 ? '+' : ''}{submission.task.score}
+                    </td>
+                    <td style={{ 
+                      padding: '12px', 
+                      textAlign: 'center',
+                      color: 'var(--wedding-cerulean)',
+                      fontSize: '0.9rem'
+                    }}>
+                      {new Date(submission.createdAt).toLocaleDateString('it-IT')}
+                    </td>
+                    <td style={{ padding: '12px', textAlign: 'center' }}>
+                      <button
+                        onClick={() => handleDeleteSubmission(submission.id)}
+                        style={{
+                          background: 'linear-gradient(135deg, #dc3545, #c82333)',
+                          color: 'white',
+                          border: 'none',
+                          borderRadius: '6px',
+                          padding: '6px 12px',
+                          fontSize: '0.8rem',
+                          cursor: 'pointer',
+                          fontWeight: '600',
+                          transition: 'all 0.2s ease'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.transform = 'scale(1.05)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.transform = 'scale(1)';
+                        }}
+                      >
+                        🗑️ Elimina
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
 
-      <div className="row" style={{ marginTop: '2rem' }}>
-        <div className="twelve columns">
-          <Link href="/" className="button">
-            ← Torna alla Home
-          </Link>
+      {/* Back Button */}
+      <div className="text-center" style={{ marginTop: '3rem' }}>
+        <Link href="/" className="btn-wedding-outline">
+          ← Torna alla Home
+        </Link>
+      </div>
+
+      {/* Decorative Elements */}
+      <div className="text-center" style={{ marginTop: '3rem' }}>
+        <div className="flex justify-center items-center space-x-2">
+          <span className="animate-float" style={{ fontSize: '1.5rem', animationDelay: '0s' }}>⚙️</span>
+          <span className="animate-float" style={{ fontSize: '1rem', animationDelay: '0.5s' }}>👑</span>
+          <span className="animate-float" style={{ fontSize: '1.5rem', animationDelay: '1s' }}>📊</span>
         </div>
       </div>
     </div>
