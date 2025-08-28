@@ -17,12 +17,12 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: "Wedding Game - Dario & Roberta",
-  description: "Un'esperienza interattiva elegante per celebrare il matrimonio di Dario e Roberta con foto, video e sfide divertenti per gli ospiti.",
+  description: "Un'esperienza interattiva per celebrare il nostro matrimonio con foto, video e sfide per voi ospiti.",
   keywords: "matrimonio, gioco, wedding, interattivo, foto, video, ospiti, Dario, Roberta",
   authors: [{ name: "Wedding Game Team" }],
   openGraph: {
     title: "Wedding Game - Dario & Roberta",
-    description: "Un'esperienza interattiva elegante per celebrare il matrimonio",
+    description: "Un'esperienza interattiva elegante per celebrare il nostro matrimonio",
     type: "website",
   },
 };
@@ -110,11 +110,13 @@ export default function RootLayout({
                   <span style={{ fontSize: '1.5rem' }}>💕</span>
                 </div>
                 <p style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '0.9rem', marginBottom: '1rem' }}>
-                  Un&apos;esperienza matrimoniale indimenticabile per Dario & Roberta
+                  Un&apos;esperienza matrimoniale alternativa
                 </p>
                 <div className="wedding-divider" style={{ background: 'linear-gradient(90deg, rgba(255,255,255,0.3), rgba(255,255,255,0.6), rgba(255,255,255,0.3))' }}></div>
                 <p style={{ fontSize: '0.8rem', color: 'rgba(255, 255, 255, 0.6)' }}>
-                  Creato con ❤️ per celebrare l&apos;amore
+                  Fatto con ❤️ da Dario e Roberta
+                  <br />
+                  © dariocast 2025 - Tutti i diritti riservati
                 </p>
               </div>
             </div>
