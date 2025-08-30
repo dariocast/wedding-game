@@ -11,6 +11,7 @@ interface Submission {
   fileType: string;
   createdAt: string;
   task: {
+    title: string;
     description: string;
     score: number;
   };
@@ -335,12 +336,27 @@ export default function AdminPage() {
                     <td style={{ 
                       padding: '12px',
                       color: 'var(--wedding-black)',
-                      maxWidth: '200px',
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      whiteSpace: 'nowrap'
+                      maxWidth: '200px'
                     }}>
-                      {submission.task.description}
+                      <div style={{ 
+                        fontWeight: '600',
+                        marginBottom: '0.25rem',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap'
+                      }}>
+                        {submission.task.title}
+                      </div>
+                      <div style={{ 
+                        fontSize: '0.8rem',
+                        color: 'var(--wedding-cerulean)',
+                        opacity: 0.8,
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap'
+                      }}>
+                        {submission.task.description}
+                      </div>
                     </td>
                     <td style={{ 
                       padding: '12px', 

@@ -8,6 +8,7 @@ import { compressFile, CompressionResult } from '../../../../utils/fileCompressi
 
 interface Task {
   id: string;
+  title: string;
   description: string;
   score: number;
 }
@@ -334,12 +335,22 @@ export default function SubmitTaskPage() {
           <div className="text-center">
             <h2 style={{ 
               color: 'var(--wedding-prussian)', 
-              fontSize: '1.8rem', 
+              fontSize: '1.9rem', 
+              marginBottom: '0.5rem',
+              lineHeight: '1.3',
+              fontWeight: '700'
+            }}>
+              {task.title}
+            </h2>
+            <p style={{ 
+              color: 'var(--wedding-cerulean)', 
+              fontSize: '1.1rem', 
               marginBottom: '1rem',
-              lineHeight: '1.4'
+              lineHeight: '1.4',
+              opacity: 0.9
             }}>
               {task.description}
-            </h2>
+            </p>
             
             {/* Score Badge */}
             <div style={{

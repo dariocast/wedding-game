@@ -21,6 +21,7 @@ interface Table {
 
 interface Task {
   id: string;
+  title: string;
   description: string;
   score: number;
   isActive: boolean;
@@ -39,6 +40,7 @@ export default function AdminLeaderboardPage() {
 
   // Form states
   const [newTableName, setNewTableName] = useState('');
+  const [newTaskTitle, setNewTaskTitle] = useState('');
   const [newTaskDescription, setNewTaskDescription] = useState('');
   const [newTaskScore, setNewTaskScore] = useState('');
   
@@ -50,6 +52,7 @@ export default function AdminLeaderboardPage() {
   
   // Edit form states
   const [editTableName, setEditTableName] = useState('');
+  // const [editTaskTitle, setEditTaskTitle] = useState(''); // TODO: Implement task editing
   const [editTaskDescription, setEditTaskDescription] = useState('');
   const [editTaskScore, setEditTaskScore] = useState('');
   const [editTaskActive, setEditTaskActive] = useState(true);
@@ -114,19 +117,21 @@ export default function AdminLeaderboardPage() {
 
   const handleCreateTask = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newTaskDescription.trim() || !newTaskScore) return;
+    if (!newTaskTitle.trim() || !newTaskDescription.trim() || !newTaskScore) return;
 
     try {
       const response = await fetch('/api/admin/tasks', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          title: newTaskTitle,
           description: newTaskDescription,
           score: parseInt(newTaskScore),
         }),
       });
 
       if (response.ok) {
+        setNewTaskTitle('');
         setNewTaskDescription('');
         setNewTaskScore('');
         fetchData();
@@ -598,7 +603,7 @@ export default function AdminLeaderboardPage() {
               <h4 style={{ color: 'var(--wedding-prussian)', marginBottom: '1rem' }}>
                 ➕ Aggiungi Nuovo Task
               </h4>
-              <div className="grid-wedding-3" style={{ gap: '1rem', alignItems: 'end' }}>
+              <div className="grid-wedding-2" style={{ gap: '1rem', marginBottom: '1rem' }}>
                 <div>
                   <label style={{ 
                     display: 'block', 
@@ -606,13 +611,13 @@ export default function AdminLeaderboardPage() {
                     color: 'var(--wedding-prussian)', 
                     fontWeight: '600' 
                   }}>
-                    Descrizione Task
+                    Titolo Task
                   </label>
                   <input
                     type="text"
-                    placeholder="es. Scatta una foto con gli sposi"
-                    value={newTaskDescription}
-                    onChange={(e) => setNewTaskDescription(e.target.value)}
+                    placeholder="es. Foto con gli sposi"
+                    value={newTaskTitle}
+                    onChange={(e) => setNewTaskTitle(e.target.value)}
                     className="input-wedding"
                     required
                   />
@@ -635,11 +640,29 @@ export default function AdminLeaderboardPage() {
                     required
                   />
                 </div>
-                <div>
-                  <button type="submit" className="btn-wedding-primary w-full">
-                    📋 Crea Task
-                  </button>
-                </div>
+              </div>
+              <div style={{ marginBottom: '1rem' }}>
+                <label style={{ 
+                  display: 'block', 
+                  marginBottom: '0.5rem', 
+                  color: 'var(--wedding-prussian)', 
+                  fontWeight: '600' 
+                }}>
+                  Descrizione Task
+                </label>
+                <textarea
+                  placeholder="es. Scatta una foto divertente con gli sposi durante il ricevimento"
+                  value={newTaskDescription}
+                  onChange={(e) => setNewTaskDescription(e.target.value)}
+                  className="input-wedding"
+                  rows={3}
+                  required
+                />
+              </div>
+              <div>
+                <button type="submit" className="btn-wedding-primary w-full">
+                  📋 Crea Task
+                </button>
               </div>
             </div>
           </form>
@@ -674,12 +697,27 @@ export default function AdminLeaderboardPage() {
                     <td style={{ 
                       padding: '16px',
                       color: 'var(--wedding-black)',
-                      maxWidth: '300px',
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      whiteSpace: 'nowrap'
+                      maxWidth: '300px'
                     }}>
-                      {task.description}
+                      <div style={{ 
+                        fontWeight: '700', 
+                        marginBottom: '0.25rem',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap'
+                      }}>
+                        {task.title}
+                      </div>
+                      <div style={{ 
+                        fontSize: '0.85rem',
+                        color: 'var(--wedding-cerulean)',
+                        opacity: 0.8,
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap'
+                      }}>
+                        {task.description}
+                      </div>
                     </td>
                     <td style={{ 
                       padding: '16px', 

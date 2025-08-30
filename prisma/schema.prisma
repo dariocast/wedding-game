@@ -1,58 +1,57 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider  = "postgresql"
   url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
 
 model User {
-  id        String   @id @default(cuid())
-  username  String   @unique
-  password  String
-  tableId   String
-  table     Table    @relation(fields: [tableId], references: [id])
-  isAdmin   Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
+  id          String       @id @default(cuid())
+  username    String       @unique
+  password    String
+  tableId     String
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  isAdmin     Boolean      @default(false)
   submissions Submission[]
+  table       Table        @relation(fields: [tableId], references: [id])
+
   @@map("users")
 }
 
 model Table {
-  id      String @id @default(cuid())
-  name    String @unique
-  score   Int    @default(0)
-  users   User[]
+  id    String @id @default(cuid())
+  name  String @unique
+  score Int    @default(0)
+  users User[]
+
   @@map("tables")
 }
 
 model Task {
-  id          String @id @default(cuid())
+  id          String       @id @default(cuid())
+  title       String
   description String
   score       Int
-  isActive    Boolean @default(true)
-  createdAt   DateTime @default(now())
-  
+  isActive    Boolean      @default(true)
+  createdAt   DateTime     @default(now())
   submissions Submission[]
+
   @@map("tasks")
 }
 
 model Submission {
   id        String   @id @default(cuid())
   taskId    String
-  task      Task     @relation(fields: [taskId], references: [id])
   userId    String
-  user      User     @relation(fields: [userId], references: [id])
   fileUrl   String
-  fileType  String // "image" or "video"
+  fileType  String
   createdAt DateTime @default(now())
-  
+  task      Task     @relation(fields: [taskId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+
   @@map("submissions")
 }

@@ -6,6 +6,7 @@ import Link from 'next/link';
 
 interface Task {
   id: string;
+  title: string;
   description: string;
   score: number;
   isActive: boolean;
@@ -209,12 +210,22 @@ export default function TasksPage() {
                 <div style={{ paddingRight: '3rem' }}>
                   <h3 style={{ 
                     color: 'var(--wedding-prussian)', 
+                    marginBottom: '0.5rem',
+                    fontSize: '1.4rem',
+                    lineHeight: '1.3',
+                    fontWeight: '700'
+                  }}>
+                    {task.title}
+                  </h3>
+                  <p style={{ 
+                    color: 'var(--wedding-cerulean)', 
                     marginBottom: '1rem',
-                    fontSize: '1.3rem',
-                    lineHeight: '1.4'
+                    fontSize: '1rem',
+                    lineHeight: '1.4',
+                    opacity: 0.9
                   }}>
                     {task.description}
-                  </h3>
+                  </p>
                   
                   {/* Score Badge */}
                   <div style={{

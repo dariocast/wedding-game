@@ -9,6 +9,7 @@ interface Submission {
   fileType: string;
   createdAt: string;
   task: {
+    title: string;
     description: string;
     score: number;
   };
@@ -775,12 +776,22 @@ export default function GalleryPage() {
                 <div>
                   <h4 style={{ 
                     color: 'var(--wedding-prussian)', 
-                    marginBottom: '0.5rem',
+                    marginBottom: '0.25rem',
                     fontSize: '1.1rem',
-                    lineHeight: '1.3'
+                    lineHeight: '1.3',
+                    fontWeight: '700'
+                  }}>
+                    {submission.task.title}
+                  </h4>
+                  <p style={{ 
+                    color: 'var(--wedding-cerulean)', 
+                    marginBottom: '0.5rem',
+                    fontSize: '0.9rem',
+                    lineHeight: '1.3',
+                    opacity: 0.9
                   }}>
                     {submission.task.description}
-                  </h4>
+                  </p>
                   
                   {/* Score Badge */}
                   <div style={{
@@ -1004,13 +1015,23 @@ export default function GalleryPage() {
               borderTop: '1px solid rgba(0, 167, 225, 0.1)'
             }}>
               <h3 style={{ 
-                margin: '0 0 1rem 0', 
-                fontSize: '1.5rem',
+                margin: '0 0 0.5rem 0', 
+                fontSize: '1.6rem',
                 color: 'var(--wedding-prussian)',
-                fontFamily: 'Playfair Display, Georgia, serif'
+                fontFamily: 'Playfair Display, Georgia, serif',
+                fontWeight: '700'
+              }}>
+                {selectedSubmission.task.title}
+              </h3>
+              <p style={{ 
+                margin: '0 0 1rem 0', 
+                fontSize: '1.1rem',
+                color: 'var(--wedding-cerulean)',
+                lineHeight: '1.4',
+                opacity: 0.9
               }}>
                 {selectedSubmission.task.description}
-              </h3>
+              </p>
               
               <div className="grid-wedding-2" style={{ gap: '1.5rem', fontSize: '1rem' }}>
                 <div>

@@ -32,17 +32,18 @@ export async function GET() {
 // POST - Crea un nuovo task
 export async function POST(request: NextRequest) {
   try {
-    const { description, score, isActive = true } = await request.json();
+    const { title, description, score, isActive = true } = await request.json();
 
-    if (!description || score === undefined) {
+    if (!title || !description || score === undefined) {
       return NextResponse.json(
-        { error: 'Description and score are required' },
+        { error: 'Title, description and score are required' },
         { status: 400 }
       );
     }
 
     const task = await prisma.task.create({
       data: {
+        title,
         description,
         score: parseInt(score),
         isActive,
@@ -66,7 +67,7 @@ export async function POST(request: NextRequest) {
 // PUT - Aggiorna un task esistente
 export async function PUT(request: NextRequest) {
   try {
-    const { id, description, score, isActive } = await request.json();
+    const { id, title, description, score, isActive } = await request.json();
 
     if (!id) {
       return NextResponse.json(
@@ -75,7 +76,8 @@ export async function PUT(request: NextRequest) {
       );
     }
 
-    const updateData: { description?: string; score?: number; isActive?: boolean } = {};
+    const updateData: { title?: string; description?: string; score?: number; isActive?: boolean } = {};
+    if (title !== undefined) updateData.title = title;
     if (description !== undefined) updateData.description = description;
     if (score !== undefined) updateData.score = parseInt(score);
     if (isActive !== undefined) updateData.isActive = isActive;

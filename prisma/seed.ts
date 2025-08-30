@@ -17,48 +17,56 @@ async function main() {
   const tasks = await Promise.all([
     prisma.task.create({
       data: {
+        title: 'Selfie del Tavolo',
         description: 'Fai un selfie di gruppo con il tuo tavolo',
         score: 50,
       },
     }),
     prisma.task.create({
       data: {
+        title: 'Momento di Gioia',
         description: 'Cattura un momento di risata spontanea',
         score: 30,
       },
     }),
     prisma.task.create({
       data: {
+        title: 'Foto con gli Sposi',
         description: 'Foto con gli sposi',
         score: 100,
       },
     }),
     prisma.task.create({
       data: {
+        title: 'Brindisi Speciale',
         description: 'Video di un brindisi',
         score: 75,
       },
     }),
     prisma.task.create({
       data: {
+        title: 'Food Photography',
         description: 'Foto del cibo più bello',
         score: 25,
       },
     }),
     prisma.task.create({
       data: {
+        title: 'Decorazioni Eleganti',
         description: 'Selfie con decorazioni della sala',
         score: 20,
       },
     }),
     prisma.task.create({
       data: {
+        title: 'Ballo di Gruppo',
         description: 'Video di una danza di gruppo',
         score: 80,
       },
     }),
     prisma.task.create({
       data: {
+        title: 'Famiglia degli Sposi',
         description: 'Foto con i genitori degli sposi',
         score: 60,
       },
