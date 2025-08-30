@@ -52,7 +52,7 @@ export default function AdminLeaderboardPage() {
   
   // Edit form states
   const [editTableName, setEditTableName] = useState('');
-  // const [editTaskTitle, setEditTaskTitle] = useState(''); // TODO: Implement task editing
+  const [editTaskTitle, setEditTaskTitle] = useState('');
   const [editTaskDescription, setEditTaskDescription] = useState('');
   const [editTaskScore, setEditTaskScore] = useState('');
   const [editTaskActive, setEditTaskActive] = useState(true);
@@ -160,25 +160,6 @@ export default function AdminLeaderboardPage() {
     }
   };
 
-  const handleToggleTask = async (task: Task) => {
-    try {
-      const response = await fetch('/api/admin/tasks', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          id: task.id,
-          isActive: !task.isActive,
-        }),
-      });
-
-      if (response.ok) {
-        fetchData();
-      }
-    } catch (error) {
-      console.error('Error toggling task:', error);
-    }
-  };
-
   // Edit Table Functions
   const openEditTableDialog = (table: Table) => {
     setEditingTable(table);
@@ -245,6 +226,7 @@ export default function AdminLeaderboardPage() {
   // Edit Task Functions
   const openEditTaskDialog = (task: Task) => {
     setEditingTask(task);
+    setEditTaskTitle(task.title);
     setEditTaskDescription(task.description);
     setEditTaskScore(task.score.toString());
     setEditTaskActive(task.isActive);
@@ -254,6 +236,7 @@ export default function AdminLeaderboardPage() {
   const closeEditTaskDialog = () => {
     setShowEditTaskDialog(false);
     setEditingTask(null);
+    setEditTaskTitle('');
     setEditTaskDescription('');
     setEditTaskScore('');
     setEditTaskActive(true);
@@ -261,7 +244,7 @@ export default function AdminLeaderboardPage() {
 
   const handleUpdateTask = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!editingTask || !editTaskDescription.trim()) return;
+    if (!editingTask || !editTaskTitle.trim() || !editTaskDescription.trim()) return;
 
     const score = parseInt(editTaskScore);
     if (isNaN(score)) {
@@ -275,6 +258,7 @@ export default function AdminLeaderboardPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           id: editingTask.id, 
+          title: editTaskTitle.trim(),
           description: editTaskDescription.trim(),
           score: score,
           isActive: editTaskActive
@@ -293,8 +277,8 @@ export default function AdminLeaderboardPage() {
     }
   };
 
-  const handleDeleteTask = async (taskId: string, taskDescription: string) => {
-    if (!confirm(`Sei sicuro di voler eliminare il task "${taskDescription}"? Questa azione eliminerà anche tutte le submission associate.`)) {
+  const handleDeleteTask = async (taskId: string, taskTitle: string) => {
+    if (!confirm(`Sei sicuro di voler eliminare il task "${taskTitle}"? Questa azione eliminerà anche tutte le submission associate.`)) {
       return;
     }
 
@@ -314,6 +298,28 @@ export default function AdminLeaderboardPage() {
     } catch (error) {
       console.error('Error deleting task:', error);
       alert('Errore durante l\'eliminazione del task');
+    }
+  };
+
+  const handleToggleTaskStatus = async (task: Task) => {
+    try {
+      const response = await fetch('/api/admin/tasks', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          id: task.id, 
+          isActive: !task.isActive
+        }),
+      });
+
+      if (response.ok) {
+        fetchData();
+      } else {
+        alert('Errore durante l\'aggiornamento dello stato del task');
+      }
+    } catch (error) {
+      console.error('Error toggling task:', error);
+      alert('Errore durante l\'aggiornamento dello stato del task');
     }
   };
 
@@ -782,7 +788,7 @@ export default function AdminLeaderboardPage() {
                         </button>
                         <button
                           className={task.isActive ? 'btn-wedding-secondary' : 'btn-wedding-primary'}
-                          onClick={() => handleToggleTask(task)}
+                          onClick={() => handleToggleTaskStatus(task)}
                           style={{ 
                             fontSize: '0.8rem',
                             padding: '6px 10px'
@@ -791,7 +797,7 @@ export default function AdminLeaderboardPage() {
                           {task.isActive ? '⏸️' : '▶️'}
                         </button>
                         <button
-                          onClick={() => handleDeleteTask(task.id, task.description)}
+                          onClick={() => handleDeleteTask(task.id, task.title)}
                           style={{
                             background: 'linear-gradient(135deg, #dc2626, #b91c1c)',
                             color: 'white',
@@ -906,6 +912,26 @@ export default function AdminLeaderboardPage() {
                     color: 'var(--wedding-prussian)', 
                     fontWeight: '600' 
                   }}>
+                    🏷️ Titolo Task
+                  </label>
+                  <input
+                    type="text"
+                    value={editTaskTitle}
+                    onChange={(e) => setEditTaskTitle(e.target.value)}
+                    className="input-wedding"
+                    placeholder="Inserisci il titolo del task"
+                    required
+                    autoFocus
+                  />
+                </div>
+
+                <div style={{ marginBottom: '1.5rem' }}>
+                  <label style={{ 
+                    display: 'block', 
+                    marginBottom: '0.5rem', 
+                    color: 'var(--wedding-prussian)', 
+                    fontWeight: '600' 
+                  }}>
                     📋 Descrizione Task
                   </label>
                   <textarea
@@ -914,7 +940,6 @@ export default function AdminLeaderboardPage() {
                     className="input-wedding"
                     placeholder="Inserisci la descrizione del task"
                     required
-                    autoFocus
                     rows={3}
                     style={{ resize: 'vertical', minHeight: '80px' }}
                   />
