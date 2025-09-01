@@ -16,12 +16,12 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Wedding Game - Dario & Roberta",
+  title: "D&R Wedding Quest - Dario & Roberta",
   description: "Un'esperienza interattiva per celebrare il nostro matrimonio con foto, video e sfide per voi ospiti.",
-  keywords: "matrimonio, gioco, wedding, interattivo, foto, video, ospiti, Dario, Roberta",
-  authors: [{ name: "Wedding Game Team" }],
+  keywords: "matrimonio, quest, wedding, interattivo, foto, video, ospiti, Dario, Roberta",
+  authors: [{ name: "D&R Wedding Quest Team" }],
   openGraph: {
-    title: "Wedding Game - Dario & Roberta",
+    title: "D&R Wedding Quest - Dario & Roberta",
     description: "Un'esperienza interattiva elegante per celebrare il nostro matrimonio",
     type: "website",
   },
@@ -81,7 +81,7 @@ export default function RootLayout({
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text'
                   }}>
-                    Wedding Game
+                    D&R Wedding Quest
                   </h1>
                 </div>
                 
@@ -106,7 +106,7 @@ export default function RootLayout({
               <div className="text-center">
                 <div className="flex justify-center items-center space-x-2 mb-2">
                   <span style={{ fontSize: '1.5rem' }}>💕</span>
-                  <span className="font-elegant" style={{ fontSize: '1.25rem', fontWeight: '600' }}>Wedding Game</span>
+                  <span className="font-elegant" style={{ fontSize: '1.25rem', fontWeight: '600' }}>D&R Wedding Quest</span>
                   <span style={{ fontSize: '1.5rem' }}>💕</span>
                 </div>
                 <p style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '0.9rem', marginBottom: '1rem' }}>

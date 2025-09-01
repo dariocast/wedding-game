@@ -344,7 +344,7 @@ export default function GalleryPage() {
           margin: '0 auto 2rem auto',
           lineHeight: '1.6'
         }}>
-          Guarda tutte le foto e i video caricati dai partecipanti al Wedding Game! 📸💕
+          Guarda tutte le foto e i video caricati dai partecipanti al D&R Wedding Quest! 📸💕
         </p>
         <div className="wedding-divider"></div>
       </section>
@@ -621,7 +621,7 @@ export default function GalleryPage() {
               <span style={{ color: 'var(--wedding-cerulean)' }}>
                 {filteredSubmissions.length !== submissions.length 
                   ? `Filtrate da ${submissions.length} totali`
-                  : 'Momenti condivisi nel Wedding Game'
+                  : 'Momenti condivisi nel D&R Wedding Quest'
                 }
               </span>
             </div>

@@ -1,9 +1,9 @@
-# Development Log - Wedding Game
+# Development Log - D&R Wedding Quest
 
 ## Data: 2024-12-19
 
 ### Analisi Iniziale Completata
-- ✅ Letto e analizzato `prd.md` - Requisiti del prodotto Wedding Game
+- ✅ Letto e analizzato `prd.md` - Requisiti del prodotto D&R Wedding Quest
 - ✅ Letto e analizzato `specs.md` - Piano di sviluppo con stack Supabase + Skeleton CSS
 - ✅ Compreso l'obiettivo: App web interattiva per intrattenere invitati al matrimonio
 
@@ -29,7 +29,7 @@
 - ✅ **COMPLETATO**: Schema Prisma creato per User, Table, Task e Submission
 - ✅ **COMPLETATO**: File di seed creato per popolare il database
 - ✅ **COMPLETATO**: Layout aggiornato con Skeleton CSS
-- ✅ **COMPLETATO**: Homepage del Wedding Game creata
+- ✅ **COMPLETATO**: Homepage del D&R Wedding Quest creata
 
 #### Passo 3: Test del Progetto
 - ✅ **COMPLETATO**: Progetto si builda correttamente con `npm run build`
@@ -99,7 +99,7 @@
 
 ### Riepilogo Finale
 
-Il **Wedding Game** è stato sviluppato completamente seguendo tutti i requisiti specificati nel PRD e nel piano di sviluppo. L'applicazione include:
+Il **D&R Wedding Quest** è stato sviluppato completamente seguendo tutti i requisiti specificati nel PRD e nel piano di sviluppo. L'applicazione include:
 
 - ✅ **Sistema completo di autenticazione** con NextAuth.js
 - ✅ **Gestione utenti e tavoli** con database PostgreSQL

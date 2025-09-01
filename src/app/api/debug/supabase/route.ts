@@ -72,7 +72,7 @@ export async function GET() {
 
     // Test 4: Prova a creare un file di test
     const testFileName = `test-${Date.now()}.txt`;
-    const testContent = 'Test upload from Wedding Game';
+    const testContent = 'Test upload from D&R Wedding Quest';
     
     const { error: uploadError } = await supabase.storage
       .from('submissions')

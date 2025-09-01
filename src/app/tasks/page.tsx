@@ -133,7 +133,7 @@ export default function TasksPage() {
           {session ? (
             <>Completa questi task per guadagnare punti per il tuo tavolo! 🏆</>
           ) : (
-            <>Ecco tutti i task disponibili nel Wedding Game! Registrati per partecipare! 💕</>
+            <>Ecco tutti i task disponibili nel D&R Wedding Quest! Registrati per partecipare! 💕</>
           )}
         </p>
         <div className="wedding-divider"></div>

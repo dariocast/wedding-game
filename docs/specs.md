@@ -1,4 +1,4 @@
-# **Piano di Sviluppo: Wedding Game 🚀 (Versione Supabase & Skeleton)**
+# **Piano di Sviluppo: D&R Wedding Quest 🚀 (Versione Supabase & Skeleton)**
 
 Questa è la roadmap dettagliata e aggiornata per completare l'applicazione, basata sul nuovo stack tecnologico.
 

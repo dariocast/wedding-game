@@ -1,12 +1,12 @@
 # Product Requirement Document (PRD)
 
-## Wedding Game: Dario & Roberta
+## D&R Wedding Quest: Dario & Roberta
 
 ### 1. Introduzione e Obiettivi
 
 #### 1.1. Visione del Prodotto
 
-Creare un'applicazione web interattiva e divertente per intrattenere gli invitati durante il ricevimento di nozze di Dario e Roberta. Il gioco ha lo scopo di incoraggiare l'interazione tra i tavoli, creare momenti memorabili e aggiungere un elemento di competizione amichevole alla celebrazione.
+Creare un'applicazione web interattiva e divertente per intrattenere gli invitati durante il ricevimento di nozze di Dario e Roberta. La quest ha lo scopo di incoraggiare l'interazione tra i tavoli, creare momenti memorabili e aggiungere un elemento di competizione amichevole alla celebrazione.
 
 #### 1.2. Obiettivi di Business
 
@@ -36,7 +36,7 @@ Creare un'applicazione web interattiva e divertente per intrattenere gli invitat
 
 #### 2.2. Amministratore (Admin)
 
-Un ruolo speciale (probabilmente uno degli sposi o un organizzatore) per la gestione del gioco.
+Un ruolo speciale (probabilmente uno degli sposi o un organizzatore) per la gestione della quest.
 
 - Permessi:
   - Ha tutti i permessi di un Invitato.
@@ -44,7 +44,7 @@ Un ruolo speciale (probabilmente uno degli sposi o un organizzatore) per la gest
   - Può visualizzare tutte le sottomissioni in un'unica dashboard.
   - Può eliminare qualsiasi sottomissione (es. contenuti inappropriati).
   - Può modificare manualmente i punteggi di squadre e singoli partecipanti.
-  - Può mettere in pausa e riavviare il gioco, bloccando temporaneamente la possibilità di completare nuovi task.
+  - Può mettere in pausa e riavviare la quest, bloccando temporaneamente la possibilità di completare nuovi task.
 
 ### 3. Caratteristiche Principali (Features)
 
@@ -77,7 +77,7 @@ Un ruolo speciale (probabilmente uno degli sposi o un organizzatore) per la gest
 
 - Dashboard Sottomissioni: Tabella con tutte le sottomissioni, ricercabile o filtrabile, con un pulsante "Elimina" per ogni riga.
 - Gestione Punteggi (Opzionale v2): Interfaccia per aggiungere o sottrarre punti a una squadra.
-- Controllo del Gioco: Un interruttore "Pausa/Avvia Gioco" per abilitare o disabilitare le sottomissioni a livello globale.
+- Controllo della Quest: Un interruttore "Pausa/Avvia Quest" per abilitare o disabilitare le sottomissioni a livello globale.
 
 ### 4. Requisiti Non Funzionali
 

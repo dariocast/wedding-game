@@ -185,7 +185,7 @@ export default function SubmitTaskPage() {
             <span style={{ fontSize: '3rem', display: 'block', marginBottom: '1rem' }}>⚠️</span>
             <h3 style={{ color: '#ffc107', marginBottom: '1rem' }}>Accesso Necessario</h3>
             <p style={{ color: 'var(--wedding-prussian)', marginBottom: '2rem' }}>
-              Devi accedere per completare i task del Wedding Game!
+              Devi accedere per completare i task del D&R Wedding Quest!
             </p>
           </div>
           

@@ -41,7 +41,7 @@ export default function Home() {
         <div className="animate-float" style={{ marginBottom: '2rem' }}>
           <span style={{ fontSize: '4rem', display: 'block', marginBottom: '1rem' }}>💒</span>
         </div>
-        <h1 className="heading-wedding">Wedding Game</h1>
+        <h1 className="heading-wedding">D&R Wedding Quest</h1>
         <h2 className="subheading-wedding" style={{ marginBottom: '2rem' }}>Dario & Roberta</h2>
         <p style={{ 
           fontSize: '1.2rem', 
@@ -50,7 +50,7 @@ export default function Home() {
           margin: '0 auto 3rem auto',
           lineHeight: '1.8'
         }}>
-          Benvenuti al nostro gioco matrimoniale interattivo! 💕<br />
+          Benvenuti alla nostra quest matrimoniale interattiva! 💕<br />
           Completate i task, caricate foto e video, e competete con il vostro tavolo per vincere premi speciali!
         </p>
         <div className="wedding-divider"></div>
@@ -306,7 +306,7 @@ export default function Home() {
               Vinci Premi
             </h4>
             <p style={{ color: 'var(--wedding-black)', lineHeight: '1.6' }}>
-              Il tavolo con più punti vince il Wedding Game e riceve premi speciali!
+              Il tavolo con più punti vince il D&R Wedding Quest e riceve premi speciali!
             </p>
           </div>
         </div>

@@ -1,6 +1,6 @@
-# 🎉 Wedding Game - Dario & Roberta
+# 🎉 D&R Wedding Quest - Dario & Roberta
 
-Un'applicazione web interattiva e divertente per intrattenere gli invitati durante il ricevimento di nozze di Dario e Roberta. Il gioco incoraggia l'interazione tra i tavoli, crea momenti memorabili e aggiunge un elemento di competizione amichevole alla celebrazione.
+Un'applicazione web interattiva e divertente per intrattenere gli invitati durante il ricevimento di nozze di Dario e Roberta. La quest incoraggia l'interazione tra i tavoli, crea momenti memorabili e aggiunge un elemento di competizione amichevole alla celebrazione.
 
 ## ✨ Caratteristiche Principali
 
@@ -35,7 +35,7 @@ Un'applicazione web interattiva e divertente per intrattenere gli invitati duran
 
 ```bash
 git clone <repository-url>
-cd wedding-game
+cd d-r-wedding-quest
 ```
 
 ### 2. Installa le Dipendenze
@@ -229,4 +229,4 @@ Progetto privato per uso personale.
 
 ---
 
-**Buon divertimento al Wedding Game! 🎉💒**
+**Buon divertimento al D&R Wedding Quest! 🎉💒**

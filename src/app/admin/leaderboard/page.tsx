@@ -369,7 +369,7 @@ export default function AdminLeaderboardPage() {
           margin: '0 auto 2rem auto',
           lineHeight: '1.6'
         }}>
-          Gestisci tavoli, task e punteggi del Wedding Game! 🎯
+          Gestisci tavoli, task e punteggi del D&R Wedding Quest! 🎯
         </p>
         <div className="wedding-divider"></div>
       </section>
