@@ -1,9 +1,9 @@
-# Development Log - D&R Wedding Quest
+# Development Log - Wedding Quest
 
 ## Data: 2024-12-19
 
 ### Analisi Iniziale Completata
-- ✅ Letto e analizzato `prd.md` - Requisiti del prodotto D&R Wedding Quest
+- ✅ Letto e analizzato `prd.md` - Requisiti del prodotto Wedding Quest
 - ✅ Letto e analizzato `specs.md` - Piano di sviluppo con stack Supabase + Skeleton CSS
 - ✅ Compreso l'obiettivo: App web interattiva per intrattenere invitati al matrimonio
 
@@ -29,7 +29,7 @@
 - ✅ **COMPLETATO**: Schema Prisma creato per User, Table, Task e Submission
 - ✅ **COMPLETATO**: File di seed creato per popolare il database
 - ✅ **COMPLETATO**: Layout aggiornato con Skeleton CSS
-- ✅ **COMPLETATO**: Homepage del D&R Wedding Quest creata
+- ✅ **COMPLETATO**: Homepage del Wedding Quest creata
 
 #### Passo 3: Test del Progetto
 - ✅ **COMPLETATO**: Progetto si builda correttamente con `npm run build`
@@ -99,7 +99,7 @@
 
 ### Riepilogo Finale
 
-Il **D&R Wedding Quest** è stato sviluppato completamente seguendo tutti i requisiti specificati nel PRD e nel piano di sviluppo. L'applicazione include:
+Il **Wedding Quest** è stato sviluppato completamente seguendo tutti i requisiti specificati nel PRD e nel piano di sviluppo. L'applicazione include:
 
 - ✅ **Sistema completo di autenticazione** con NextAuth.js
 - ✅ **Gestione utenti e tavoli** con database PostgreSQL
@@ -176,7 +176,7 @@ L'applicazione è pronta per essere utilizzata al matrimonio di Dario e Roberta!
 
 ### Risultato del Refactoring
 
-Il **D&R Wedding Quest** ora presenta:
+Il **Wedding Quest** ora presenta:
 - 🎨 **Design Coerente**: Schema colori Royal Blue elegante e professionale
 - 🖼️ **Branding Personalizzato**: Loghi reali al posto di emoji
 - 📱 **Esperienza Mobile**: Favicon e icone ottimizzate per tutti i dispositivi

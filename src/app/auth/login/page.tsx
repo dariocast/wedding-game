@@ -55,7 +55,7 @@ export default function LoginPage() {
           margin: '0 auto 2rem auto',
           lineHeight: '1.6'
         }}>
-          Accedi al tuo account per partecipare al D&R Wedding Quest di Dario & Roberta! 💕
+          Accedi al tuo account per partecipare al Wedding Quest di Dario & Roberta! 💕
         </p>
         <div className="wedding-divider"></div>
       </section>

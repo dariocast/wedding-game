@@ -1,4 +1,4 @@
-# 🎉 D&R Wedding Quest - Dario & Roberta
+# 🎉 Wedding Quest - Dario & Roberta
 
 Un'applicazione web interattiva e divertente per intrattenere gli invitati durante il ricevimento di nozze di Dario e Roberta. La quest incoraggia l'interazione tra i tavoli, crea momenti memorabili e aggiunge un elemento di competizione amichevole alla celebrazione.
 
@@ -229,4 +229,4 @@ Progetto privato per uso personale.
 
 ---
 
-**Buon divertimento al D&R Wedding Quest! 🎉💒**
+**Buon divertimento al Wedding Quest! 🎉💒**

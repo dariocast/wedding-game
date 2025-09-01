@@ -344,7 +344,7 @@ export default function GalleryPage() {
           margin: '0 auto 2rem auto',
           lineHeight: '1.6'
         }}>
-          Guarda tutte le foto e i video caricati dai partecipanti al D&R Wedding Quest! 📸💕
+          Guarda tutte le foto e i video caricati dai partecipanti al Wedding Quest! 📸💕
         </p>
         <div className="wedding-divider"></div>
       </section>
@@ -621,7 +621,7 @@ export default function GalleryPage() {
               <span style={{ color: 'var(--secondary-color)' }}>
                 {filteredSubmissions.length !== submissions.length 
                   ? `Filtrate da ${submissions.length} totali`
-                  : 'Momenti condivisi nel D&R Wedding Quest'
+                  : 'Momenti condivisi nel Wedding Quest'
                 }
               </span>
             </div>

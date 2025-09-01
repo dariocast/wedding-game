@@ -147,7 +147,7 @@ export default function AdminPage() {
           margin: '0 auto 2rem auto',
           lineHeight: '1.6'
         }}>
-          Gestisci il D&R Wedding Quest e monitora le attività dei partecipanti! 👑
+          Gestisci il Wedding Quest e monitora le attività dei partecipanti! 👑
         </p>
         <div className="wedding-divider"></div>
       </section>

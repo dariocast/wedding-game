@@ -100,7 +100,7 @@ export default function RegisterPage() {
           margin: '0 auto 2rem auto',
           lineHeight: '1.6'
         }}>
-          Crea il tuo account per partecipare al D&R Wedding Quest di Dario & Roberta! 💕
+          Crea il tuo account per partecipare al Wedding Quest di Dario & Roberta! 💕
         </p>
         <div className="wedding-divider"></div>
       </section>

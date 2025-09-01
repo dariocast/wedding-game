@@ -1,6 +1,6 @@
 # Product Requirement Document (PRD)
 
-## D&R Wedding Quest: Dario & Roberta
+## Wedding Quest: Dario & Roberta
 
 ### 1. Introduzione e Obiettivi
 

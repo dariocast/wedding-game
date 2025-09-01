@@ -41,7 +41,7 @@ export default function Home() {
         <div className="animate-float" style={{ marginBottom: '2rem' }}>
           <span style={{ fontSize: '4rem', display: 'block', marginBottom: '1rem' }}>💒</span>
         </div>
-        <h1 className="heading-wedding">D&R Wedding Quest</h1>
+        <h1 className="heading-wedding">Wedding Quest</h1>
         <h2 className="subheading-wedding" style={{ marginBottom: '2rem' }}>Dario & Roberta</h2>
         <p style={{ 
           fontSize: '1.2rem', 
@@ -306,7 +306,7 @@ export default function Home() {
               Vinci Premi
             </h4>
             <p style={{ color: 'var(--text-color)', lineHeight: '1.6' }}>
-              Il tavolo con più punti vince il D&R Wedding Quest e riceve premi speciali!
+              Il tavolo con più punti vince il Wedding Quest e riceve premi speciali!
             </p>
           </div>
         </div>
