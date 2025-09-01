@@ -153,7 +153,7 @@ export default function SubmitTaskPage() {
           <div className="animate-float">
             <span style={{ fontSize: '3rem', display: 'block', marginBottom: '1rem' }}>⏳</span>
           </div>
-          <p style={{ color: 'var(--wedding-cerulean)', fontSize: '1.1rem' }}>
+          <p style={{ color: 'var(--secondary-color)', fontSize: '1.1rem' }}>
             Caricamento...
           </p>
         </div>
@@ -184,7 +184,7 @@ export default function SubmitTaskPage() {
           }}>
             <span style={{ fontSize: '3rem', display: 'block', marginBottom: '1rem' }}>⚠️</span>
             <h3 style={{ color: '#ffc107', marginBottom: '1rem' }}>Accesso Necessario</h3>
-            <p style={{ color: 'var(--wedding-prussian)', marginBottom: '2rem' }}>
+            <p style={{ color: 'var(--primary-color)', marginBottom: '2rem' }}>
               Devi accedere per completare i task del D&R Wedding Quest!
             </p>
           </div>
@@ -219,7 +219,7 @@ export default function SubmitTaskPage() {
           <div className="animate-float">
             <span style={{ fontSize: '3rem', display: 'block', marginBottom: '1rem' }}>⏳</span>
           </div>
-          <p style={{ color: 'var(--wedding-cerulean)', fontSize: '1.1rem' }}>
+          <p style={{ color: 'var(--secondary-color)', fontSize: '1.1rem' }}>
             Caricamento task...
           </p>
         </div>
@@ -286,10 +286,10 @@ export default function SubmitTaskPage() {
               <span style={{ fontSize: '4rem', display: 'block' }}>🏆</span>
             </div>
             <h3 style={{ color: '#28a745', marginBottom: '1rem' }}>Congratulazioni!</h3>
-            <p style={{ color: 'var(--wedding-prussian)', marginBottom: '1rem', fontSize: '1.1rem' }}>
+            <p style={{ color: 'var(--primary-color)', marginBottom: '1rem', fontSize: '1.1rem' }}>
               Hai completato il task con successo!
             </p>
-            <p style={{ color: 'var(--wedding-cerulean)' }}>
+            <p style={{ color: 'var(--secondary-color)' }}>
               Il tuo file è stato caricato e i punti sono stati assegnati al tuo tavolo.
             </p>
           </div>
@@ -319,7 +319,7 @@ export default function SubmitTaskPage() {
         </h1>
         <p style={{ 
           fontSize: '1.1rem', 
-          color: 'var(--wedding-prussian)', 
+          color: 'var(--primary-color)', 
           maxWidth: '600px', 
           margin: '0 auto 2rem auto',
           lineHeight: '1.6'
@@ -334,7 +334,7 @@ export default function SubmitTaskPage() {
         <div className="card-wedding" style={{ marginBottom: '2rem' }}>
           <div className="text-center">
             <h2 style={{ 
-              color: 'var(--wedding-prussian)', 
+              color: 'var(--primary-color)', 
               fontSize: '1.9rem', 
               marginBottom: '0.5rem',
               lineHeight: '1.3',
@@ -343,7 +343,7 @@ export default function SubmitTaskPage() {
               {task.title}
             </h2>
             <p style={{ 
-              color: 'var(--wedding-cerulean)', 
+              color: 'var(--secondary-color)', 
               fontSize: '1.1rem', 
               marginBottom: '1rem',
               lineHeight: '1.4',
@@ -389,7 +389,7 @@ export default function SubmitTaskPage() {
               style={{ 
                 display: 'block', 
                 marginBottom: '1rem', 
-                color: 'var(--wedding-prussian)', 
+                color: 'var(--primary-color)', 
                 fontWeight: '600',
                 fontSize: '1.1rem'
               }}
@@ -405,14 +405,14 @@ export default function SubmitTaskPage() {
               required
               style={{ 
                 padding: '1rem',
-                border: '2px dashed rgba(0, 167, 225, 0.3)',
-                backgroundColor: 'rgba(0, 167, 225, 0.05)',
+                border: '2px dashed var(--border-color)',
+                backgroundColor: 'var(--accent-color)',
                 cursor: 'pointer'
               }}
             />
             <p style={{ 
               fontSize: '0.9rem', 
-              color: 'var(--wedding-cerulean)', 
+              color: 'var(--secondary-color)', 
               marginTop: '0.5rem',
               fontStyle: 'italic',
               textAlign: 'center'
@@ -426,8 +426,8 @@ export default function SubmitTaskPage() {
           {compressing && (
             <div className="mb-3">
               <div style={{ 
-                background: 'linear-gradient(135deg, rgba(0, 167, 225, 0.1), rgba(0, 167, 225, 0.05))',
-                border: '1px solid rgba(0, 167, 225, 0.3)',
+                background: 'linear-gradient(135deg, rgba(0, 167, 225, 0.1), var(--accent-color))',
+                border: '1px solid var(--border-color)',
                 borderRadius: '8px',
                 padding: '1.5rem',
                 textAlign: 'center'
@@ -435,7 +435,7 @@ export default function SubmitTaskPage() {
                 <div className="animate-float" style={{ marginBottom: '1rem' }}>
                   <span style={{ fontSize: '2rem' }}>🔄</span>
                 </div>
-                <p style={{ color: 'var(--wedding-cerulean)', fontWeight: '600' }}>
+                <p style={{ color: 'var(--secondary-color)', fontWeight: '600' }}>
                   Ottimizzando il file...
                 </p>
               </div>
@@ -456,12 +456,12 @@ export default function SubmitTaskPage() {
                   <h4 style={{ color: '#28a745', marginBottom: '1rem' }}>File Ottimizzato!</h4>
                 </div>
                 
-                <div style={{ fontSize: '0.9rem', color: 'var(--wedding-prussian)' }}>
+                <div style={{ fontSize: '0.9rem', color: 'var(--primary-color)' }}>
                   <div className="grid-wedding-2" style={{ gap: '1rem', textAlign: 'center' }}>
                     <div>
                       <strong>📁 File Originale:</strong><br />
                       {selectedFile.name}<br />
-                      <span style={{ color: 'var(--wedding-cerulean)' }}>
+                      <span style={{ color: 'var(--secondary-color)' }}>
                         {(compressionInfo.originalSize / 1024 / 1024).toFixed(2)} MB
                       </span>
                     </div>

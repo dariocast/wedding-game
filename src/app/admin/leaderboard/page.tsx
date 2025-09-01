@@ -364,7 +364,7 @@ export default function AdminLeaderboardPage() {
         </h1>
         <p style={{ 
           fontSize: '1.1rem', 
-          color: 'var(--wedding-prussian)', 
+          color: 'var(--primary-color)', 
           maxWidth: '600px', 
           margin: '0 auto 2rem auto',
           lineHeight: '1.6'
@@ -413,7 +413,7 @@ export default function AdminLeaderboardPage() {
         <div className="card-wedding">
           <div className="text-center mb-3">
             <h3 style={{ 
-              color: 'var(--wedding-prussian)', 
+              color: 'var(--primary-color)', 
               fontSize: '1.8rem', 
               marginBottom: '1rem',
               display: 'flex',
@@ -434,7 +434,7 @@ export default function AdminLeaderboardPage() {
               padding: '1.5rem',
               marginBottom: '2rem'
             }}>
-              <h4 style={{ color: 'var(--wedding-prussian)', marginBottom: '1rem' }}>
+              <h4 style={{ color: 'var(--primary-color)', marginBottom: '1rem' }}>
                 ➕ Aggiungi Nuovo Tavolo
               </h4>
               <div className="grid-wedding-2" style={{ gap: '1rem', alignItems: 'end' }}>
@@ -442,7 +442,7 @@ export default function AdminLeaderboardPage() {
                   <label style={{ 
                     display: 'block', 
                     marginBottom: '0.5rem', 
-                    color: 'var(--wedding-prussian)', 
+                    color: 'var(--primary-color)', 
                     fontWeight: '600' 
                   }}>
                     Nome Tavolo
@@ -494,7 +494,7 @@ export default function AdminLeaderboardPage() {
                     <td style={{ 
                       padding: '16px', 
                       fontWeight: '600',
-                      color: 'var(--wedding-prussian)'
+                      color: 'var(--primary-color)'
                     }}>
                       {table.name}
                     </td>
@@ -510,7 +510,7 @@ export default function AdminLeaderboardPage() {
                           borderRadius: '6px',
                           textAlign: 'center',
                           fontWeight: '700',
-                          color: 'var(--wedding-prussian)',
+                          color: 'var(--primary-color)',
                           backgroundColor: 'rgba(255, 255, 255, 0.9)'
                         }}
                       />
@@ -529,7 +529,7 @@ export default function AdminLeaderboardPage() {
                         <button
                           onClick={() => openEditTableDialog(table)}
                           style={{
-                            background: 'linear-gradient(135deg, var(--wedding-cerulean), var(--wedding-prussian))',
+                            background: 'linear-gradient(135deg, var(--wedding-cerulean), var(--primary-color))',
                             color: 'white',
                             border: 'none',
                             borderRadius: '6px',
@@ -585,7 +585,7 @@ export default function AdminLeaderboardPage() {
         <div className="card-wedding">
           <div className="text-center mb-3">
             <h3 style={{ 
-              color: 'var(--wedding-prussian)', 
+              color: 'var(--primary-color)', 
               fontSize: '1.8rem', 
               marginBottom: '1rem',
               display: 'flex',
@@ -606,7 +606,7 @@ export default function AdminLeaderboardPage() {
               padding: '1.5rem',
               marginBottom: '2rem'
             }}>
-              <h4 style={{ color: 'var(--wedding-prussian)', marginBottom: '1rem' }}>
+              <h4 style={{ color: 'var(--primary-color)', marginBottom: '1rem' }}>
                 ➕ Aggiungi Nuovo Task
               </h4>
               <div className="grid-wedding-2" style={{ gap: '1rem', marginBottom: '1rem' }}>
@@ -614,7 +614,7 @@ export default function AdminLeaderboardPage() {
                   <label style={{ 
                     display: 'block', 
                     marginBottom: '0.5rem', 
-                    color: 'var(--wedding-prussian)', 
+                    color: 'var(--primary-color)', 
                     fontWeight: '600' 
                   }}>
                     Titolo Task
@@ -632,7 +632,7 @@ export default function AdminLeaderboardPage() {
                   <label style={{ 
                     display: 'block', 
                     marginBottom: '0.5rem', 
-                    color: 'var(--wedding-prussian)', 
+                    color: 'var(--primary-color)', 
                     fontWeight: '600' 
                   }}>
                     Punteggio
@@ -651,7 +651,7 @@ export default function AdminLeaderboardPage() {
                 <label style={{ 
                   display: 'block', 
                   marginBottom: '0.5rem', 
-                  color: 'var(--wedding-prussian)', 
+                  color: 'var(--primary-color)', 
                   fontWeight: '600' 
                 }}>
                   Descrizione Task
@@ -684,7 +684,7 @@ export default function AdminLeaderboardPage() {
             }}>
               <thead>
                 <tr style={{ 
-                  background: 'linear-gradient(135deg, var(--wedding-cerulean), var(--wedding-prussian))',
+                  background: 'linear-gradient(135deg, var(--wedding-cerulean), var(--primary-color))',
                   color: 'white'
                 }}>
                   <th style={{ padding: '16px', textAlign: 'left', fontWeight: '600' }}>📋 Descrizione</th>
@@ -767,7 +767,7 @@ export default function AdminLeaderboardPage() {
                         <button
                           onClick={() => openEditTaskDialog(task)}
                           style={{
-                            background: 'linear-gradient(135deg, var(--wedding-cerulean), var(--wedding-prussian))',
+                            background: 'linear-gradient(135deg, var(--wedding-cerulean), var(--primary-color))',
                             color: 'white',
                             border: 'none',
                             borderRadius: '6px',
@@ -850,7 +850,7 @@ export default function AdminLeaderboardPage() {
                   <label style={{ 
                     display: 'block', 
                     marginBottom: '0.5rem', 
-                    color: 'var(--wedding-prussian)', 
+                    color: 'var(--primary-color)', 
                     fontWeight: '600' 
                   }}>
                     🏆 Nome Tavolo
@@ -909,7 +909,7 @@ export default function AdminLeaderboardPage() {
                   <label style={{ 
                     display: 'block', 
                     marginBottom: '0.5rem', 
-                    color: 'var(--wedding-prussian)', 
+                    color: 'var(--primary-color)', 
                     fontWeight: '600' 
                   }}>
                     🏷️ Titolo Task
@@ -929,7 +929,7 @@ export default function AdminLeaderboardPage() {
                   <label style={{ 
                     display: 'block', 
                     marginBottom: '0.5rem', 
-                    color: 'var(--wedding-prussian)', 
+                    color: 'var(--primary-color)', 
                     fontWeight: '600' 
                   }}>
                     📋 Descrizione Task
@@ -949,7 +949,7 @@ export default function AdminLeaderboardPage() {
                   <label style={{ 
                     display: 'block', 
                     marginBottom: '0.5rem', 
-                    color: 'var(--wedding-prussian)', 
+                    color: 'var(--primary-color)', 
                     fontWeight: '600' 
                   }}>
                     🎯 Punteggio
@@ -972,7 +972,7 @@ export default function AdminLeaderboardPage() {
                     display: 'flex', 
                     alignItems: 'center', 
                     gap: '0.5rem',
-                    color: 'var(--wedding-prussian)', 
+                    color: 'var(--primary-color)', 
                     fontWeight: '600',
                     cursor: 'pointer'
                   }}>

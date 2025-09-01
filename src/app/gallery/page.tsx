@@ -279,7 +279,7 @@ export default function GalleryPage() {
           <div className="animate-float">
             <span style={{ fontSize: '3rem', display: 'block', marginBottom: '1rem' }}>⏳</span>
           </div>
-          <p style={{ color: 'var(--wedding-cerulean)', fontSize: '1.1rem' }}>
+          <p style={{ color: 'var(--secondary-color)', fontSize: '1.1rem' }}>
             Caricamento galleria...
           </p>
         </div>
@@ -339,7 +339,7 @@ export default function GalleryPage() {
         </h1>
         <p style={{ 
           fontSize: '1.1rem', 
-          color: 'var(--wedding-prussian)', 
+          color: 'var(--primary-color)', 
           maxWidth: '600px', 
           margin: '0 auto 2rem auto',
           lineHeight: '1.6'
@@ -354,7 +354,7 @@ export default function GalleryPage() {
         <div className="card-wedding mb-4">
           <div className="flex justify-between items-center mb-3">
             <h3 style={{ 
-              color: 'var(--wedding-prussian)', 
+              color: 'var(--primary-color)', 
               fontSize: '1.5rem', 
               margin: 0,
               display: 'flex',
@@ -386,7 +386,7 @@ export default function GalleryPage() {
                   <label style={{ 
                     display: 'block', 
                     marginBottom: '0.5rem', 
-                    color: 'var(--wedding-prussian)', 
+                    color: 'var(--primary-color)', 
                     fontWeight: '600',
                     fontSize: '0.9rem'
                   }}>
@@ -410,7 +410,7 @@ export default function GalleryPage() {
                   <label style={{ 
                     display: 'block', 
                     marginBottom: '0.5rem', 
-                    color: 'var(--wedding-prussian)', 
+                    color: 'var(--primary-color)', 
                     fontWeight: '600',
                     fontSize: '0.9rem'
                   }}>
@@ -433,7 +433,7 @@ export default function GalleryPage() {
                   <label style={{ 
                     display: 'block', 
                     marginBottom: '0.5rem', 
-                    color: 'var(--wedding-prussian)', 
+                    color: 'var(--primary-color)', 
                     fontWeight: '600',
                     fontSize: '0.9rem'
                   }}>
@@ -462,7 +462,7 @@ export default function GalleryPage() {
                   <label style={{ 
                     display: 'block', 
                     marginBottom: '0.5rem', 
-                    color: 'var(--wedding-prussian)', 
+                    color: 'var(--primary-color)', 
                     fontWeight: '600',
                     fontSize: '0.9rem'
                   }}>
@@ -486,7 +486,7 @@ export default function GalleryPage() {
                   <label style={{ 
                     display: 'block', 
                     marginBottom: '0.5rem', 
-                    color: 'var(--wedding-prussian)', 
+                    color: 'var(--primary-color)', 
                     fontWeight: '600',
                     fontSize: '0.9rem'
                   }}>
@@ -512,7 +512,7 @@ export default function GalleryPage() {
                   <label style={{ 
                     display: 'block', 
                     marginBottom: '0.5rem', 
-                    color: 'var(--wedding-prussian)', 
+                    color: 'var(--primary-color)', 
                     fontWeight: '600',
                     fontSize: '0.9rem'
                   }}>
@@ -536,7 +536,7 @@ export default function GalleryPage() {
                   <label style={{ 
                     display: 'block', 
                     marginBottom: '0.5rem', 
-                    color: 'var(--wedding-prussian)', 
+                    color: 'var(--primary-color)', 
                     fontWeight: '600',
                     fontSize: '0.9rem'
                   }}>
@@ -556,7 +556,7 @@ export default function GalleryPage() {
 
               {/* Filter Actions */}
               <div className="flex justify-between items-center" style={{ marginTop: '1rem' }}>
-                <div style={{ fontSize: '0.9rem', color: 'var(--wedding-cerulean)' }}>
+                <div style={{ fontSize: '0.9rem', color: 'var(--secondary-color)' }}>
                   📊 Mostrando <strong>{filteredSubmissions.length}</strong> di <strong>{submissions.length}</strong> submission
                 </div>
                 <button
@@ -578,10 +578,10 @@ export default function GalleryPage() {
           <div className="animate-float" style={{ marginBottom: '2rem' }}>
             <span style={{ fontSize: '4rem', display: 'block' }}>🔍</span>
           </div>
-          <h3 style={{ color: 'var(--wedding-prussian)', marginBottom: '1rem' }}>
+          <h3 style={{ color: 'var(--primary-color)', marginBottom: '1rem' }}>
             Nessun Risultato
           </h3>
-          <p style={{ color: 'var(--wedding-cerulean)', marginBottom: '2rem', fontSize: '1.1rem' }}>
+          <p style={{ color: 'var(--secondary-color)', marginBottom: '2rem', fontSize: '1.1rem' }}>
             Non ci sono submission che corrispondono ai filtri selezionati.<br />
             Prova a modificare i criteri di ricerca.
           </p>
@@ -594,10 +594,10 @@ export default function GalleryPage() {
           <div className="animate-float" style={{ marginBottom: '2rem' }}>
             <span style={{ fontSize: '4rem', display: 'block' }}>📷</span>
           </div>
-          <h3 style={{ color: 'var(--wedding-prussian)', marginBottom: '1rem' }}>
+          <h3 style={{ color: 'var(--primary-color)', marginBottom: '1rem' }}>
             Galleria Vuota
           </h3>
-          <p style={{ color: 'var(--wedding-cerulean)', marginBottom: '2rem', fontSize: '1.1rem' }}>
+          <p style={{ color: 'var(--secondary-color)', marginBottom: '2rem', fontSize: '1.1rem' }}>
             Non ci sono ancora foto o video nella galleria.<br />
             Completa i task per vedere le prime submission!
           </p>
@@ -618,7 +618,7 @@ export default function GalleryPage() {
           }}>
             <div className="text-center">
               <strong>📊 {filteredSubmissions.length} Submission</strong><br />
-              <span style={{ color: 'var(--wedding-cerulean)' }}>
+              <span style={{ color: 'var(--secondary-color)' }}>
                 {filteredSubmissions.length !== submissions.length 
                   ? `Filtrate da ${submissions.length} totali`
                   : 'Momenti condivisi nel D&R Wedding Quest'
@@ -682,9 +682,9 @@ export default function GalleryPage() {
                       <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>
                         {submission.fileType === 'image' ? '📷' : '🎥'}
                       </div>
-                      <div style={{ color: 'var(--wedding-cerulean)', fontSize: '0.9rem', textAlign: 'center', fontWeight: '600' }}>
+                      <div style={{ color: 'var(--secondary-color)', fontSize: '0.9rem', textAlign: 'center', fontWeight: '600' }}>
                         Task Completato! ✅<br />
-                        <small style={{ color: 'var(--wedding-prussian)' }}>File caricato con successo</small>
+                        <small style={{ color: 'var(--primary-color)' }}>File caricato con successo</small>
                       </div>
                     </div>
                   ) : submission.fileType === 'image' ? (
@@ -733,7 +733,7 @@ export default function GalleryPage() {
                     justifyContent: 'center',
                     flexDirection: 'column',
                     background: 'linear-gradient(135deg, rgba(220, 53, 69, 0.1), rgba(220, 53, 69, 0.05))',
-                    color: 'var(--wedding-prussian)'
+                    color: 'var(--primary-color)'
                   }}>
                     <span style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>
                       {submission.fileType === 'image' ? '🖼️' : '🎥'}
@@ -775,7 +775,7 @@ export default function GalleryPage() {
                 {/* Submission Info */}
                 <div>
                   <h4 style={{ 
-                    color: 'var(--wedding-prussian)', 
+                    color: 'var(--primary-color)', 
                     marginBottom: '0.25rem',
                     fontSize: '1.1rem',
                     lineHeight: '1.3',
@@ -784,7 +784,7 @@ export default function GalleryPage() {
                     {submission.task.title}
                   </h4>
                   <p style={{ 
-                    color: 'var(--wedding-cerulean)', 
+                    color: 'var(--secondary-color)', 
                     marginBottom: '0.5rem',
                     fontSize: '0.9rem',
                     lineHeight: '1.3',
@@ -820,14 +820,14 @@ export default function GalleryPage() {
                   </div>
                   
                   {/* User Info */}
-                  <div style={{ fontSize: '0.85rem', color: 'var(--wedding-cerulean)' }}>
+                  <div style={{ fontSize: '0.85rem', color: 'var(--secondary-color)' }}>
                     <p style={{ margin: '0.25rem 0' }}>
                       <strong>👤 {submission.user.username}</strong>
                     </p>
-                    <p style={{ margin: '0.25rem 0', color: 'var(--wedding-prussian)' }}>
+                    <p style={{ margin: '0.25rem 0', color: 'var(--primary-color)' }}>
                       🏆 {submission.user.table.name}
                     </p>
-                    <p style={{ margin: '0.25rem 0', color: 'var(--wedding-cerulean)', fontSize: '0.8rem' }}>
+                    <p style={{ margin: '0.25rem 0', color: 'var(--secondary-color)', fontSize: '0.8rem' }}>
                       📅 {formatDate(submission.createdAt)}
                     </p>
                   </div>
@@ -876,7 +876,7 @@ export default function GalleryPage() {
                 position: 'absolute',
                 top: '15px',
                 right: '15px',
-                background: 'linear-gradient(135deg, var(--wedding-picton), var(--wedding-cerulean))',
+                background: 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))',
                 color: 'white',
                 border: 'none',
                 borderRadius: '50%',
@@ -911,7 +911,7 @@ export default function GalleryPage() {
                     left: '15px',
                     top: '50%',
                     transform: 'translateY(-50%)',
-                    background: 'linear-gradient(135deg, var(--wedding-cerulean), var(--wedding-prussian))',
+                    background: 'linear-gradient(135deg, var(--secondary-color), var(--primary-color))',
                     color: 'white',
                     border: 'none',
                     borderRadius: '50%',
@@ -942,7 +942,7 @@ export default function GalleryPage() {
                     right: '15px',
                     top: '50%',
                     transform: 'translateY(-50%)',
-                    background: 'linear-gradient(135deg, var(--wedding-cerulean), var(--wedding-prussian))',
+                    background: 'linear-gradient(135deg, var(--secondary-color), var(--primary-color))',
                     color: 'white',
                     border: 'none',
                     borderRadius: '50%',
@@ -1017,7 +1017,7 @@ export default function GalleryPage() {
               <h3 style={{ 
                 margin: '0 0 0.5rem 0', 
                 fontSize: '1.6rem',
-                color: 'var(--wedding-prussian)',
+                color: 'var(--primary-color)',
                 fontFamily: 'Playfair Display, Georgia, serif',
                 fontWeight: '700'
               }}>
@@ -1026,7 +1026,7 @@ export default function GalleryPage() {
               <p style={{ 
                 margin: '0 0 1rem 0', 
                 fontSize: '1.1rem',
-                color: 'var(--wedding-cerulean)',
+                color: 'var(--secondary-color)',
                 lineHeight: '1.4',
                 opacity: 0.9
               }}>
@@ -1036,20 +1036,20 @@ export default function GalleryPage() {
               <div className="grid-wedding-2" style={{ gap: '1.5rem', fontSize: '1rem' }}>
                 <div>
                   <div style={{ marginBottom: '0.75rem' }}>
-                    <span style={{ color: 'var(--wedding-cerulean)', fontWeight: '600' }}>🏆 Tavolo:</span>
+                    <span style={{ color: 'var(--secondary-color)', fontWeight: '600' }}>🏆 Tavolo:</span>
                     <br />
-                    <strong style={{ color: 'var(--wedding-prussian)' }}>{selectedSubmission.user.table.name}</strong>
+                    <strong style={{ color: 'var(--primary-color)' }}>{selectedSubmission.user.table.name}</strong>
                   </div>
                   <div style={{ marginBottom: '0.75rem' }}>
-                    <span style={{ color: 'var(--wedding-cerulean)', fontWeight: '600' }}>👤 Utente:</span>
+                    <span style={{ color: 'var(--secondary-color)', fontWeight: '600' }}>👤 Utente:</span>
                     <br />
-                    <strong style={{ color: 'var(--wedding-prussian)' }}>{selectedSubmission.user.username}</strong>
+                    <strong style={{ color: 'var(--primary-color)' }}>{selectedSubmission.user.username}</strong>
                   </div>
                 </div>
                 
                 <div>
                   <div style={{ marginBottom: '0.75rem' }}>
-                    <span style={{ color: 'var(--wedding-cerulean)', fontWeight: '600' }}>🎯 Punteggio:</span>
+                    <span style={{ color: 'var(--secondary-color)', fontWeight: '600' }}>🎯 Punteggio:</span>
                     <br />
                     <span style={{ 
                       color: selectedSubmission.task.score >= 0 ? '#28a745' : '#dc3545', 
@@ -1060,9 +1060,9 @@ export default function GalleryPage() {
                     </span>
                   </div>
                   <div>
-                    <span style={{ color: 'var(--wedding-cerulean)', fontWeight: '600' }}>📅 Data:</span>
+                    <span style={{ color: 'var(--secondary-color)', fontWeight: '600' }}>📅 Data:</span>
                     <br />
-                    <strong style={{ color: 'var(--wedding-prussian)' }}>
+                    <strong style={{ color: 'var(--primary-color)' }}>
                       {formatDate(selectedSubmission.createdAt)}
                     </strong>
                   </div>
@@ -1078,7 +1078,7 @@ export default function GalleryPage() {
                   bottom: '20px',
                   left: '50%',
                   transform: 'translateX(-50%)',
-                  background: 'linear-gradient(135deg, var(--wedding-picton), var(--wedding-cerulean))',
+                  background: 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))',
                   color: 'white',
                   padding: '8px 16px',
                   borderRadius: '20px',

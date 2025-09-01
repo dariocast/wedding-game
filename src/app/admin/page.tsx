@@ -142,7 +142,7 @@ export default function AdminPage() {
         </h1>
         <p style={{ 
           fontSize: '1.1rem', 
-          color: 'var(--wedding-prussian)', 
+          color: 'var(--primary-color)', 
           maxWidth: '600px', 
           margin: '0 auto 2rem auto',
           lineHeight: '1.6'
@@ -158,7 +158,7 @@ export default function AdminPage() {
         <div className="card-wedding">
           <div className="text-center mb-3">
             <h3 style={{ 
-              color: 'var(--wedding-prussian)', 
+              color: 'var(--primary-color)', 
               fontSize: '1.8rem', 
               marginBottom: '1rem',
               display: 'flex',
@@ -196,7 +196,7 @@ export default function AdminPage() {
         <div className="card-wedding">
           <div className="text-center mb-3">
             <h3 style={{ 
-              color: 'var(--wedding-prussian)', 
+              color: 'var(--primary-color)', 
               fontSize: '1.8rem', 
               marginBottom: '1rem',
               display: 'flex',
@@ -224,7 +224,7 @@ export default function AdminPage() {
               }}>
                 {submissions.length}
               </div>
-              <p style={{ color: 'var(--wedding-prussian)', fontWeight: '600', margin: 0 }}>
+              <p style={{ color: 'var(--primary-color)', fontWeight: '600', margin: 0 }}>
                 📤 Submission Totali
               </p>
             </div>
@@ -244,7 +244,7 @@ export default function AdminPage() {
               }}>
                 {new Set(submissions.map(s => s.user.username)).size}
               </div>
-              <p style={{ color: 'var(--wedding-prussian)', fontWeight: '600', margin: 0 }}>
+              <p style={{ color: 'var(--primary-color)', fontWeight: '600', margin: 0 }}>
                 👥 Partecipanti Attivi
               </p>
             </div>
@@ -256,7 +256,7 @@ export default function AdminPage() {
       <div className="card-wedding">
         <div className="text-center mb-3">
           <h3 style={{ 
-            color: 'var(--wedding-prussian)', 
+            color: 'var(--primary-color)', 
             fontSize: '1.8rem', 
             marginBottom: '1rem',
             display: 'flex',
@@ -286,7 +286,7 @@ export default function AdminPage() {
             textAlign: 'center'
           }}>
             <span style={{ fontSize: '3rem', display: 'block', marginBottom: '1rem' }}>📭</span>
-            <h4 style={{ color: 'var(--wedding-prussian)', marginBottom: '1rem' }}>Nessuna Submission</h4>
+            <h4 style={{ color: 'var(--primary-color)', marginBottom: '1rem' }}>Nessuna Submission</h4>
             <p style={{ color: 'var(--wedding-cerulean)' }}>
               I partecipanti devono completare i task per vedere le submission qui.
             </p>
@@ -322,7 +322,7 @@ export default function AdminPage() {
                     <td style={{ 
                       padding: '12px', 
                       fontWeight: '600',
-                      color: 'var(--wedding-prussian)'
+                      color: 'var(--primary-color)'
                     }}>
                       {submission.user.username}
                     </td>

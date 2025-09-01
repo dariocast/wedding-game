@@ -50,7 +50,7 @@ export default function LoginPage() {
         </h1>
         <p style={{ 
           fontSize: '1.1rem', 
-          color: 'var(--wedding-prussian)', 
+          color: 'var(--primary-color)', 
           maxWidth: '500px', 
           margin: '0 auto 2rem auto',
           lineHeight: '1.6'
@@ -65,7 +65,7 @@ export default function LoginPage() {
         <div className="card-wedding">
           <div className="text-center mb-3">
             <h2 style={{ 
-              color: 'var(--wedding-prussian)', 
+              color: 'var(--primary-color)', 
               fontSize: '1.8rem', 
               marginBottom: '1rem',
               display: 'flex',
@@ -84,7 +84,7 @@ export default function LoginPage() {
                 style={{ 
                   display: 'block', 
                   marginBottom: '0.5rem', 
-                  color: 'var(--wedding-prussian)', 
+                  color: 'var(--primary-color)', 
                   fontWeight: '600' 
                 }}
               >
@@ -108,7 +108,7 @@ export default function LoginPage() {
                 style={{ 
                   display: 'block', 
                   marginBottom: '0.5rem', 
-                  color: 'var(--wedding-prussian)', 
+                  color: 'var(--primary-color)', 
                   fontWeight: '600' 
                 }}
               >
@@ -167,7 +167,7 @@ export default function LoginPage() {
 
           {/* Links Section */}
           <div className="text-center" style={{ marginTop: '2rem' }}>
-            <p style={{ color: 'var(--wedding-prussian)', marginBottom: '1rem' }}>
+            <p style={{ color: 'var(--primary-color)', marginBottom: '1rem' }}>
               Non hai un account?
             </p>
             <Link href="/auth/register" className="btn-wedding-secondary w-full block text-center mb-2">

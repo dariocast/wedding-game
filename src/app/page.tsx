@@ -45,7 +45,7 @@ export default function Home() {
         <h2 className="subheading-wedding" style={{ marginBottom: '2rem' }}>Dario & Roberta</h2>
         <p style={{ 
           fontSize: '1.2rem', 
-          color: 'var(--wedding-prussian)', 
+          color: 'var(--primary-color)', 
           maxWidth: '600px', 
           margin: '0 auto 3rem auto',
           lineHeight: '1.8'
@@ -62,7 +62,7 @@ export default function Home() {
         <div className="card-wedding">
           <div className="text-center mb-3">
             <h3 style={{ 
-              color: 'var(--wedding-prussian)', 
+              color: 'var(--primary-color)', 
               fontSize: '1.8rem', 
               marginBottom: '1rem',
               display: 'flex',
@@ -79,7 +79,7 @@ export default function Home() {
               <div className="animate-float">
                 <span style={{ fontSize: '2rem' }}>⏳</span>
               </div>
-              <p style={{ color: 'var(--wedding-cerulean)', marginTop: '1rem' }}>
+              <p style={{ color: 'var(--secondary-color)', marginTop: '1rem' }}>
                 Caricamento classifica...
               </p>
             </div>
@@ -94,7 +94,7 @@ export default function Home() {
               }}>
                 <thead>
                   <tr style={{ 
-                    background: 'linear-gradient(135deg, var(--wedding-picton), var(--wedding-cerulean))',
+                    background: 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))',
                     color: 'white'
                   }}>
                     <th style={{ padding: '12px 8px', textAlign: 'center', fontWeight: '600' }}>Pos.</th>
@@ -113,14 +113,14 @@ export default function Home() {
                         padding: '12px 8px', 
                         textAlign: 'center', 
                         fontWeight: '600',
-                        color: index === 0 ? 'var(--wedding-picton)' : 'var(--wedding-prussian)'
+                        color: index === 0 ? 'var(--primary-color)' : 'var(--primary-color)'
                       }}>
                         {index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `${index + 1}°`}
                       </td>
                       <td style={{ 
                         padding: '12px 8px', 
                         fontWeight: index === 0 ? '700' : '500',
-                        color: 'var(--wedding-black)'
+                        color: 'var(--text-color)'
                       }}>
                         {table.name}
                       </td>
@@ -128,14 +128,14 @@ export default function Home() {
                         padding: '12px 8px', 
                         textAlign: 'center', 
                         fontWeight: '600',
-                        color: 'var(--wedding-cerulean)'
+                        color: 'var(--secondary-color)'
                       }}>
                         {table.score}
                       </td>
                       <td style={{ 
                         padding: '12px 8px', 
                         textAlign: 'center',
-                        color: 'var(--wedding-prussian)'
+                        color: 'var(--primary-color)'
                       }}>
                         {table.userCount}
                       </td>
@@ -151,7 +151,7 @@ export default function Home() {
         <div className="card-wedding">
           <div className="text-center mb-3">
             <h3 style={{ 
-              color: 'var(--wedding-prussian)', 
+              color: 'var(--primary-color)', 
               fontSize: '1.8rem', 
               marginBottom: '1rem',
               display: 'flex',
@@ -168,7 +168,7 @@ export default function Home() {
               <div className="animate-float">
                 <span style={{ fontSize: '2rem' }}>⏳</span>
               </div>
-              <p style={{ color: 'var(--wedding-cerulean)', marginTop: '1rem' }}>
+              <p style={{ color: 'var(--secondary-color)', marginTop: '1rem' }}>
                 Caricamento...
               </p>
             </div>
@@ -183,7 +183,7 @@ export default function Home() {
               }}>
                 <div className="text-center">
                   <strong>Benvenuto, {session.user.username}! 👋</strong><br />
-                  <span style={{ color: 'var(--wedding-cerulean)' }}>
+                  <span style={{ color: 'var(--secondary-color)' }}>
                     Tavolo: {session.user.tableName}
                   </span>
                 </div>
@@ -241,7 +241,7 @@ export default function Home() {
       {/* How It Works Section */}
       <section className="card-wedding" style={{ marginTop: '3rem' }}>
         <h3 className="text-center" style={{ 
-          color: 'var(--wedding-prussian)', 
+          color: 'var(--primary-color)', 
           fontSize: '2rem', 
           marginBottom: '2rem',
           display: 'flex',
@@ -257,17 +257,17 @@ export default function Home() {
             <div style={{ 
               fontSize: '3rem', 
               marginBottom: '1rem',
-              background: 'linear-gradient(135deg, var(--wedding-picton), var(--wedding-cerulean))',
+              background: 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text'
             }}>
               1️⃣
             </div>
-            <h4 style={{ color: 'var(--wedding-prussian)', marginBottom: '1rem' }}>
+            <h4 style={{ color: 'var(--primary-color)', marginBottom: '1rem' }}>
               Registrati
             </h4>
-            <p style={{ color: 'var(--wedding-black)', lineHeight: '1.6' }}>
+            <p style={{ color: 'var(--text-color)', lineHeight: '1.6' }}>
               Scegli il tuo username e seleziona il tavolo (squadra) per iniziare l&apos;avventura
             </p>
           </div>
@@ -276,17 +276,17 @@ export default function Home() {
             <div style={{ 
               fontSize: '3rem', 
               marginBottom: '1rem',
-              background: 'linear-gradient(135deg, var(--wedding-cerulean), var(--wedding-prussian))',
+              background: 'linear-gradient(135deg, var(--secondary-color), var(--primary-color))',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text'
             }}>
               2️⃣
             </div>
-            <h4 style={{ color: 'var(--wedding-prussian)', marginBottom: '1rem' }}>
+            <h4 style={{ color: 'var(--primary-color)', marginBottom: '1rem' }}>
               Completa i Task
             </h4>
-            <p style={{ color: 'var(--wedding-black)', lineHeight: '1.6' }}>
+            <p style={{ color: 'var(--text-color)', lineHeight: '1.6' }}>
               Carica foto o video per completare i task divertenti e guadagna punti per il tuo tavolo
             </p>
           </div>
@@ -295,17 +295,17 @@ export default function Home() {
             <div style={{ 
               fontSize: '3rem', 
               marginBottom: '1rem',
-              background: 'linear-gradient(135deg, var(--wedding-prussian), var(--wedding-picton))',
+              background: 'linear-gradient(135deg, var(--primary-color), var(--primary-color))',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text'
             }}>
               3️⃣
             </div>
-            <h4 style={{ color: 'var(--wedding-prussian)', marginBottom: '1rem' }}>
+            <h4 style={{ color: 'var(--primary-color)', marginBottom: '1rem' }}>
               Vinci Premi
             </h4>
-            <p style={{ color: 'var(--wedding-black)', lineHeight: '1.6' }}>
+            <p style={{ color: 'var(--text-color)', lineHeight: '1.6' }}>
               Il tavolo con più punti vince il D&R Wedding Quest e riceve premi speciali!
             </p>
           </div>

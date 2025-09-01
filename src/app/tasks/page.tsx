@@ -125,7 +125,7 @@ export default function TasksPage() {
         </h1>
         <p style={{ 
           fontSize: '1.1rem', 
-          color: 'var(--wedding-prussian)', 
+          color: 'var(--primary-color)', 
           maxWidth: '600px', 
           margin: '0 auto 2rem auto',
           lineHeight: '1.6'
@@ -164,7 +164,7 @@ export default function TasksPage() {
           <div className="animate-float" style={{ marginBottom: '2rem' }}>
             <span style={{ fontSize: '4rem', display: 'block' }}>🎯</span>
           </div>
-          <h3 style={{ color: 'var(--wedding-prussian)', marginBottom: '1rem' }}>
+          <h3 style={{ color: 'var(--primary-color)', marginBottom: '1rem' }}>
             {session ? 'Ottimo Lavoro!' : 'Nessun Task Disponibile'}
           </h3>
           <p style={{ color: 'var(--wedding-cerulean)', marginBottom: '2rem', fontSize: '1.1rem' }}>
@@ -209,7 +209,7 @@ export default function TasksPage() {
                 {/* Task Content */}
                 <div style={{ paddingRight: '3rem' }}>
                   <h3 style={{ 
-                    color: 'var(--wedding-prussian)', 
+                    color: 'var(--primary-color)', 
                     marginBottom: '0.5rem',
                     fontSize: '1.4rem',
                     lineHeight: '1.3',

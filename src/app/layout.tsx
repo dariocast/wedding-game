@@ -1,17 +1,20 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Lato, Allura } from "next/font/google";
+import Image from "next/image";
 import { Providers } from "./providers";
 import './globals.css';
 
-const inter = Inter({
-  variable: "--font-inter",
+const lato = Lato({
+  variable: "--font-lato",
   subsets: ["latin"],
+  weight: ["300", "400", "700", "900"],
   display: 'swap',
 });
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const allura = Allura({
+  variable: "--font-allura",
   subsets: ["latin"],
+  weight: ["400"],
   display: 'swap',
 });
 
@@ -20,10 +23,20 @@ export const metadata: Metadata = {
   description: "Un'esperienza interattiva per celebrare il nostro matrimonio con foto, video e sfide per voi ospiti.",
   keywords: "matrimonio, quest, wedding, interattivo, foto, video, ospiti, Dario, Roberta",
   authors: [{ name: "D&R Wedding Quest Team" }],
+  icons: {
+    icon: [
+      { url: '/images/favicon.ico', sizes: 'any' },
+      { url: '/images/favicon.svg', type: 'image/svg+xml' },
+      { url: '/images/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+    ],
+    apple: '/images/apple-touch-icon.png',
+  },
+  manifest: '/images/site.webmanifest',
   openGraph: {
     title: "D&R Wedding Quest - Dario & Roberta",
     description: "Un'esperienza interattiva elegante per celebrare il nostro matrimonio",
     type: "website",
+    images: ['/images/cover-image.webp'],
   },
 };
 
@@ -33,7 +46,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="it" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="it" className={`${lato.variable} ${allura.variable}`}>
       <body>
         <Providers>
           {/* Wedding Background Pattern */}
@@ -64,19 +77,28 @@ export default function RootLayout({
                   <div style={{
                     width: '40px',
                     height: '40px',
-                    background: 'linear-gradient(135deg, var(--wedding-picton), var(--wedding-cerulean))',
+                    background: 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))',
                     borderRadius: '12px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    boxShadow: '0 4px 15px rgba(0, 167, 225, 0.3)'
+                    boxShadow: '0 4px 15px rgba(0, 90, 156, 0.3)',
+                    overflow: 'hidden'
                   }}>
-                    <span style={{ fontSize: '20px' }}>💒</span>
+                    <Image 
+                      src="/images/logo_cifre_clear.png" 
+                      alt="D&R Logo" 
+                      width={32}
+                      height={32}
+                      style={{ 
+                        objectFit: 'contain'
+                      }} 
+                    />
                   </div>
                   <h1 className="font-elegant" style={{
                     fontSize: '1.5rem',
                     fontWeight: '700',
-                    background: 'linear-gradient(135deg, var(--wedding-picton), var(--wedding-cerulean), var(--wedding-prussian))',
+                    background: 'linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--primary-color))',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text'

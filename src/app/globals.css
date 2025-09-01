@@ -1,17 +1,32 @@
 /* D&R Wedding Quest - Custom CSS with Wedding Palette */
 
-/* CSS Variables for Wedding Colors */
+/* CSS Variables for D&R Wedding Quest - Royal Blue Theme */
 :root {
-  --wedding-white: #ffffff;
-  --wedding-picton: #00a7e1;
-  --wedding-black: #00171f;
-  --wedding-prussian: #003459;
-  --wedding-cerulean: #007ea7;
+  /* New Royal Blue Color Palette */
+  --primary-color: #005a9c; /* Blu Savoia / Royal Blue */
+  --secondary-color: #aec6cf; /* Blu polvere chiaro / Light Powder Blue */
+  --accent-color: #e0f2f7; /* Azzurro cielo molto chiaro */
+  --text-color: #333;
+  --text-light: #f8f8f8;
+  --bg-color: #ffffff;
+  --bg-alternate: #f9f9fc;
+  --border-color: #dce4e8;
+
+  /* Font Variables */
+  --font-heading: var(--font-allura), "Allura", cursive;
+  --font-body: var(--font-lato), "Lato", sans-serif;
   
-  /* Gradients */
-  --wedding-gradient: linear-gradient(135deg, #ffffff 0%, #00a7e1 25%, #007ea7 50%, #003459 75%, #00171f 100%);
-  --wedding-gradient-soft: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 25%, #bae6fd 50%, #7dd3fc 75%, #38bdf8 100%);
-  --wedding-radial: radial-gradient(circle at center, #ffffff 0%, #00a7e1 30%, #007ea7 60%, #003459 90%);
+  /* Legacy Wedding Colors (for backward compatibility) */
+  --wedding-white: var(--bg-color);
+  --wedding-picton: var(--primary-color);
+  --wedding-black: var(--text-color);
+  --wedding-prussian: var(--primary-color);
+  --wedding-cerulean: var(--secondary-color);
+  
+  /* Updated Gradients */
+  --wedding-gradient: linear-gradient(135deg, var(--bg-color) 0%, var(--primary-color) 25%, var(--secondary-color) 50%, var(--primary-color) 75%, var(--text-color) 100%);
+  --wedding-gradient-soft: linear-gradient(135deg, var(--bg-color) 0%, var(--accent-color) 25%, var(--secondary-color) 50%, var(--accent-color) 75%, var(--bg-alternate) 100%);
+  --wedding-radial: radial-gradient(circle at center, var(--bg-color) 0%, var(--accent-color) 30%, var(--secondary-color) 60%, var(--primary-color) 90%);
 }
 
 /* Reset and Base Styles */
@@ -22,13 +37,13 @@
 }
 
 html {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-body), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   scroll-behavior: smooth;
 }
 
 body {
   background: var(--wedding-gradient-soft);
-  color: var(--wedding-black);
+  color: var(--text-color);
   min-height: 100vh;
   line-height: 1.6;
   font-size: 16px;
@@ -37,14 +52,14 @@ body {
 
 /* Typography */
 .font-elegant {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-heading), Georgia, serif;
 }
 
 .heading-wedding {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-heading), Georgia, serif;
   font-size: clamp(2rem, 5vw, 4rem);
   font-weight: 700;
-  background: linear-gradient(135deg, var(--wedding-picton), var(--wedding-cerulean), var(--wedding-prussian));
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--primary-color));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -54,9 +69,9 @@ body {
 }
 
 .subheading-wedding {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-heading), Georgia, serif;
   font-size: clamp(1.5rem, 3vw, 2.5rem);
-  color: var(--wedding-prussian);
+  color: var(--primary-color);
   font-weight: 600;
   text-align: center;
   margin-bottom: 1rem;
@@ -72,29 +87,29 @@ body {
 .card-wedding {
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(0, 167, 225, 0.2);
+  border: 1px solid var(--border-color);
   border-radius: 16px;
   padding: 2rem;
-  box-shadow: 0 8px 32px rgba(0, 52, 89, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 90, 156, 0.1);
   transition: all 0.3s ease;
   margin-bottom: 2rem;
 }
 
 .card-wedding:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 167, 225, 0.2);
+  box-shadow: 0 12px 40px rgba(0, 90, 156, 0.2);
 }
 
 .card-wedding-dark {
-  background: linear-gradient(135deg, var(--wedding-prussian), var(--wedding-black));
-  color: white;
-  border: 1px solid rgba(0, 167, 225, 0.3);
+  background: linear-gradient(135deg, var(--primary-color), var(--text-color));
+  color: var(--text-light);
+  border: 1px solid var(--border-color);
 }
 
 /* Button Styles */
 .btn-wedding-primary {
-  background: linear-gradient(135deg, var(--wedding-picton), var(--wedding-cerulean));
-  color: white;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: var(--text-light);
   font-weight: 600;
   padding: 12px 24px;
   border-radius: 8px;
@@ -104,17 +119,17 @@ body {
   text-decoration: none;
   display: inline-block;
   text-align: center;
-  box-shadow: 0 4px 15px rgba(0, 167, 225, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 90, 156, 0.3);
 }
 
 .btn-wedding-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 167, 225, 0.4);
+  box-shadow: 0 6px 20px rgba(0, 90, 156, 0.4);
 }
 
 .btn-wedding-secondary {
-  background: linear-gradient(135deg, var(--wedding-cerulean), var(--wedding-prussian));
-  color: white;
+  background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+  color: var(--text-light);
   font-weight: 600;
   padding: 12px 24px;
   border-radius: 8px;
@@ -128,8 +143,8 @@ body {
 
 .btn-wedding-outline {
   background: transparent;
-  color: var(--wedding-picton);
-  border: 2px solid var(--wedding-picton);
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
   font-weight: 600;
   padding: 10px 22px;
   border-radius: 8px;
@@ -141,15 +156,15 @@ body {
 }
 
 .btn-wedding-outline:hover {
-  background: var(--wedding-picton);
-  color: white;
+  background: var(--primary-color);
+  color: var(--text-light);
 }
 
 /* Input Styles */
 .input-wedding {
   width: 100%;
   padding: 12px 16px;
-  border: 2px solid rgba(0, 167, 225, 0.3);
+  border: 2px solid var(--border-color);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(10px);
@@ -159,8 +174,8 @@ body {
 
 .input-wedding:focus {
   outline: none;
-  border-color: var(--wedding-picton);
-  box-shadow: 0 0 0 3px rgba(0, 167, 225, 0.1);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(0, 90, 156, 0.1);
 }
 
 /* Grid Layouts */
@@ -186,7 +201,7 @@ body {
 .wedding-divider {
   width: 100px;
   height: 4px;
-  background: linear-gradient(90deg, var(--wedding-picton), var(--wedding-cerulean));
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
   border-radius: 2px;
   margin: 2rem auto;
 }
@@ -198,9 +213,9 @@ body {
   border-radius: 20px;
   font-size: 0.875rem;
   font-weight: 500;
-  background: linear-gradient(135deg, rgba(0, 167, 225, 0.1), rgba(0, 126, 167, 0.1));
-  color: var(--wedding-prussian);
-  border: 1px solid rgba(0, 167, 225, 0.2);
+  background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+  color: var(--primary-color);
+  border: 1px solid var(--border-color);
 }
 
 /* Animations */
