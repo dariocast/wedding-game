@@ -56,7 +56,7 @@ export default function RootLayout({
             left: 0,
             width: '100%',
             height: '100%',
-            background: 'var(--wedding-radial)',
+            background: 'var(--wedding-white)',
             opacity: 0.03,
             zIndex: -1
           }}></div>
@@ -77,7 +77,7 @@ export default function RootLayout({
                   <div style={{
                     width: '40px',
                     height: '40px',
-                    background: 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))',
+                    background: 'var(--wedding-picton)',
                     borderRadius: '12px',
                     display: 'flex',
                     alignItems: 'center',
@@ -98,10 +98,7 @@ export default function RootLayout({
                   <h1 className="font-elegant" style={{
                     fontSize: '1.5rem',
                     fontWeight: '700',
-                    background: 'linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--primary-color))',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text'
+                    color: 'var(--wedding-prussian)'
                   }}>
                     Wedding Quest
                   </h1>
@@ -134,7 +131,7 @@ export default function RootLayout({
                 <p style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '0.9rem', marginBottom: '1rem' }}>
                   Un&apos;esperienza matrimoniale alternativa
                 </p>
-                <div className="wedding-divider" style={{ background: 'linear-gradient(90deg, rgba(255,255,255,0.3), rgba(255,255,255,0.6), rgba(255,255,255,0.3))' }}></div>
+                <div className="wedding-divider" style={{ background: 'rgba(255,255,255,0.5)' }}></div>
                 <p style={{ fontSize: '0.8rem', color: 'rgba(255, 255, 255, 0.6)' }}>
                   Fatto con ❤️ da Dario e Roberta
                   <br />

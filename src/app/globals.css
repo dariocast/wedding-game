@@ -23,10 +23,10 @@
   --wedding-prussian: var(--primary-color);
   --wedding-cerulean: var(--secondary-color);
   
-  /* Updated Gradients */
-  --wedding-gradient: linear-gradient(135deg, var(--bg-color) 0%, var(--primary-color) 25%, var(--secondary-color) 50%, var(--primary-color) 75%, var(--text-color) 100%);
-  --wedding-gradient-soft: linear-gradient(135deg, var(--bg-color) 0%, var(--accent-color) 25%, var(--secondary-color) 50%, var(--accent-color) 75%, var(--bg-alternate) 100%);
-  --wedding-radial: radial-gradient(circle at center, var(--bg-color) 0%, var(--accent-color) 30%, var(--secondary-color) 60%, var(--primary-color) 90%);
+  /* Gradients rimossi: ora colori solidi coerenti con la palette */
+  --wedding-gradient: var(--bg-color);
+  --wedding-gradient-soft: var(--bg-alternate);
+  --wedding-radial: var(--bg-color);
 }
 
 /* Reset and Base Styles */
@@ -42,7 +42,7 @@ html {
 }
 
 body {
-  background: var(--wedding-gradient-soft);
+  background: var(--wedding-white);
   color: var(--text-color);
   min-height: 100vh;
   line-height: 1.6;
@@ -59,10 +59,7 @@ body {
   font-family: var(--font-heading), Georgia, serif;
   font-size: clamp(2rem, 5vw, 4rem);
   font-weight: 700;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--primary-color));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--primary-color);
   text-align: center;
   margin-bottom: 1rem;
   letter-spacing: -0.02em;
@@ -101,14 +98,14 @@ body {
 }
 
 .card-wedding-dark {
-  background: linear-gradient(135deg, var(--primary-color), var(--text-color));
+  background: var(--primary-color);
   color: var(--text-light);
   border: 1px solid var(--border-color);
 }
 
 /* Button Styles */
 .btn-wedding-primary {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: var(--primary-color);
   color: var(--text-light);
   font-weight: 600;
   padding: 12px 24px;
@@ -128,7 +125,7 @@ body {
 }
 
 .btn-wedding-secondary {
-  background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+  background: var(--secondary-color);
   color: var(--text-light);
   font-weight: 600;
   padding: 12px 24px;
@@ -201,7 +198,7 @@ body {
 .wedding-divider {
   width: 100px;
   height: 4px;
-  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  background: var(--primary-color);
   border-radius: 2px;
   margin: 2rem auto;
 }
@@ -213,7 +210,7 @@ body {
   border-radius: 20px;
   font-size: 0.875rem;
   font-weight: 500;
-  background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+  background: var(--accent-color);
   color: var(--primary-color);
   border: 1px solid var(--border-color);
 }
